@@ -1,0 +1,58 @@
+@(registerForm:Form[(String,(String,String),String,String,(String,String),String)])
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("register"){
+<div class="register-content">
+	<div class="registerForm">
+		<h2>注册用户</h2>
+		
+		@form(routes.User.toregister){
+			<table>
+			<tr>
+				<td align="right"><label id="usernameinf">用户名：</label></td>
+				<td><input class="base-input" id="name" name="name"></td>
+			</tr>
+			<tr>
+				<td align="right"><label id="label">密码：</label></td>
+				<td><input type="password" class="base-input" name="password.main"></td>
+			</tr>
+			<tr>
+				<td align="right"><label>确认密码：</label></td>
+				<td><input type="password" class="base-input" name="password.confirm"></td>
+			</tr>
+			<tr>
+	            <td align="right"><label>email：</label></td>        
+	            <td class="width70"><input name="email" type="text" class="imagecode" /></td>
+	        </tr>
+	        <tr>
+	            <td align="right"><label>性别：</label></td>        
+	            <td class="width70"><input type="radio" name="sex" value="0" />男
+	            <input type="radio" name="sex" value="1">女</td>
+	        </tr>
+	        <tr>
+	        	<td colspan="2">
+	        	<select id="provice" name="city.first">
+	        		<option>--选择省份--</option>
+	        	</select>
+	        	<select id="citys" name="city.second">
+	        		<option>--选择城市--</option>
+	        	</select>
+	        	</td>
+	        </tr>
+	        <tr>
+	        	<td align="right"><label>自我介绍：</label></td>
+	        	<td rowspan="1"><textarea name="intro" rows="4" cols="22"></textarea></td>
+	        </tr>
+			<tr>
+				<td colspan="2"><input type="submit" class="submit" value="注册">
+				</td>
+			</tr>
+		</table>
+		<div class="otheruser">
+			
+		</div>
+		}
+		</div>
+</div>
+}
