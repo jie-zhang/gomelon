@@ -1,0 +1,17 @@
+# ignore all dot files;
+.*
+
+# exprot for .gitignore
+!.gitignore
+
+# ignore play! working directory 
+db
+eclipse
+log
+logs
+project/project
+project/target
+target
+test-result
+tmp
+dist
