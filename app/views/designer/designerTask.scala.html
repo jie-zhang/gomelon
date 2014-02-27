@@ -1,0 +1,197 @@
+@(message: String)
+
+@import helper._
+@import helper.twitterBootstrap._
+@main("s"){
+	<div class="content-link">
+			@views.html.record.recordMenu()	
+	</div>
+	<div class="content-core">
+		<div>
+			<div>
+				<p style="float:left;"><img src="http://imgbp.hotp.jp/CSP/IMG_SRC/19/34/B003961934/B003961934_60-80.jpg" oncontextmenu="return false;" /></p>
+				<div style="float:left;">
+					<p>選択中のスタイリスト</p>
+					<p>坂本 隆文</span>　の予約可能日程</p>
+					<p><a href="@controllers.record.routes.Records.selectDesignerRecord">其它技师日程查看</a></p>
+				</div>
+			</div>
+	</div>
+		
+		<table cellpadding="0" cellspacing="0" width="750px" border="1px solid gray">
+			<tr>
+				<th rowspan="2"><a href="#">《</a></th><th colspan="8">2014年02月</th><th colspan="4">2014年03月</th><th rowspan="2"><a href="#">》</a></th>
+			</tr>
+			<tr>
+				<th class="dayCell">21<br/>周五</th>
+				<th class="sat">22<br/>周六</th>
+				<th class="sun">23<br/>周末</th>
+				<th class="dayCell">24<br/>周一</th>
+				<th class="dayCell">25<br/>周二</th>
+				<th class="dayCell">26<br/>周三</th>
+				<th class="dayCell">27<br/>周四</th>
+				<th class="dayCell">28<br/>周五</th>
+				<th class="sat">01<br/>周六</th>
+				<th class="sun">02<br/>周末</th>
+				<th class="dayCell">03<br/>周一</th>
+				<th class="dayCell">04<br/>周二</th>
+			</tr>
+			<tr>
+				<th>
+					<table cellpadding="0" cellspacing="0" width="100%" border="1px solid gray">
+						<tr>
+							<th><p>10：00</p></th>
+						</tr>
+						<tr>
+							<th><p>10：30</p></th>
+						</tr>
+						<tr>
+							<th><p>11：00</p></th>
+						</tr>
+						<tr>
+							<th><p>11：30</p></th>
+						</tr>
+						<tr>
+							<th><p>12：00</p></th>
+						</tr>
+						<tr>
+							<th><p>12：30</p></th>
+						</tr>
+						<tr>
+							<th><p>13：00</p></th>
+						</tr>
+						<tr>
+							<th><p>13：30</p></th>
+						</tr>
+						<tr>
+							<th><p>14：00</p></th>
+						</tr>
+						<tr>
+							<th><p>14：30</p></th>
+						</tr>
+						<tr>
+							<th><p>15：00</p></th>
+						</tr>
+						<tr>
+							<th><p>15：30</p></th>
+						</tr>
+						<tr>
+							<th><p>16：00</p></th>
+						</tr>
+						<tr>
+							<th><p>16：30</p></th>
+						</tr>
+						<tr>
+							<th><p>17：00</p></th>
+						</tr>
+						<tr>
+							<th><p>17：30</p></th>
+						</tr>
+						<tr>
+							<th><p>18：00</p></th>
+						</tr>
+						<tr>
+							<th><p>18：30</p></th>
+						</tr>
+						<tr>
+							<th><p>19：00</p></th>
+						</tr>
+						<tr>
+							<th><p>19：30</p></th>
+						</tr>
+						<tr>
+							<th><p>20：00</p></th>
+						</tr>
+					</table>
+				</th>
+				<th colspan="12">
+					<table cellpadding="0" cellspacing="0" width="100%" height="1080px" class="designerTask">
+					@for(i <- 0 until 21){
+						<tr>
+							<th><a href="#"><span>×</span></a></th>
+							<th><a href="#"><span>×</span></a></th>
+							<th><a href="#"><span>◎</span></a></th>
+							<th><a href="#"><span>◎</span></a></th>
+							<th><a href="#"><span>×</span></a></th>
+							<th><a href="#"><span>◎</span></a></th>
+							<th><a href="#"><span>×</span></a></th>
+							<th><a href="#"><span>×</span></a></th>
+							<th><a href="#"><span>◎</span></a></th>
+							<th><a href="#"><span>◎</span></a></th>
+							<th><a href="#"><span>◎</span></a></th>
+							<th><a href="#"><span>×</span></a></th>
+						</tr>
+						}
+					</table>
+				</th>
+				<th>
+					<table cellpadding="0" cellspacing="0" width="100%" border="1px solid gray">
+						<tr>
+							<th><p>10：00</p></th>
+						</tr>
+						<tr>
+							<th><p>10：30</p></th>
+						</tr>
+						<tr>
+							<th><p>11：00</p></th>
+						</tr>
+						<tr>
+							<th><p>11：30</p></th>
+						</tr>
+						<tr>
+							<th><p>12：00</p></th>
+						</tr>
+						<tr>
+							<th><p>12：30</p></th>
+						</tr>
+						<tr>
+							<th><p>13：00</p></th>
+						</tr>
+						<tr>
+							<th><p>13：30</p></th>
+						</tr>
+						<tr>
+							<th><p>14：00</p></th>
+						</tr>
+						<tr>
+							<th><p>14：30</p></th>
+						</tr>
+						<tr>
+							<th><p>15：00</p></th>
+						</tr>
+						<tr>
+							<th><p>15：30</p></th>
+						</tr>
+						<tr>
+							<th><p>16：00</p></th>
+						</tr>
+						<tr>
+							<th><p>16：30</p></th>
+						</tr>
+						<tr>
+							<th><p>17：00</p></th>
+						</tr>
+						<tr>
+							<th><p>17：30</p></th>
+						</tr>
+						<tr>
+							<th><p>18：00</p></th>
+						</tr>
+						<tr>
+							<th><p>18：30</p></th>
+						</tr>
+						<tr>
+							<th><p>19：00</p></th>
+						</tr>
+						<tr>
+							<th><p>19：30</p></th>
+						</tr>
+						<tr>
+							<th><p>20：00</p></th>
+						</tr>
+					</table>
+				</th>
+			</tr>
+		</table>
+	</div>
+}

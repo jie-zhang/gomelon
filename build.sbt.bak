@@ -1,0 +1,17 @@
+name := "forTest"
+
+version := "1.0-SNAPSHOT"
+
+libraryDependencies ++= Seq(
+  jdbc,
+  anorm,
+  cache
+)     
+
+libraryDependencies += "org.mongodb" %% "casbah" % "2.6.3"
+
+appDependencies = Seq(
+  "se.radley" %% "play-plugins-salat" % "CHECK_GITHUB_FOR_LATEST_VERSION"
+)
+
+play.Project.playScalaSettings

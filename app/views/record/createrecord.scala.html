@@ -1,0 +1,63 @@
+@(record:Form[Record])
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("message"){
+		
+	<div class="content-core">
+		<h2>预约详情</h2>
+		@form(controllers.record.routes.Records.toCreateRecords){
+		<table border="1px solid black" cellspacing="0" cellpadding="0" class="recordview-table">
+			<tr>
+				<td width="100px">店铺</td>
+				<td width="600px"><input name="store"></td>
+			</tr>
+			
+			<tr>
+				<td>预约状态</td>
+				<td><select name="serviceStatus">
+					<option value="2">过期</option>
+					<option value="0">预约</option>
+					<option value="1">完成消费</option>
+					<option value="-1">取消</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td>开始日期</td>
+				<td><input type="date" name="serviceStart"></td>
+			</tr>
+			<tr>
+				<td>结束日期</td>
+				<td><input type="date" name="serviceEnd"></td>
+			</tr>
+			<tr>
+				<td>指定人员</td>
+				<td><input type="checkbox" name="serviceDesigner" value="zhangsan">张三</td>
+			</tr>
+			
+			<tr>
+				<td>服务项目</td>
+				<td><input type="checkbox" name="serviceItem" value="spa">spa</td>
+			</tr>
+			<tr>
+				<td>会员名</td>
+				<td><input name="userName"></td>
+			</tr>
+			<tr>
+				<td>会员号码</td>
+				<td><input name="userPhone"></td>
+			</tr>
+			<tr>
+				<td>会员留言</td>
+				<td><input name="userLeaveMessage"></td>
+			</tr>
+			<tr>
+				<td>合计金额</td>
+				<td><input name="costTotal"></td>
+			</tr>
+		</table>
+		<input type="button" value="返回预约履历" onclick="window.location.href='@controllers.record.routes.Records.recordmain(1)';"/>
+		<input type="submit" value="提交">
+		}
+	</div>
+}
