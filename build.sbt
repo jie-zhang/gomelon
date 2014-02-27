@@ -1,4 +1,4 @@
-name := "forTest"
+name := "gomelon"
 
 version := "1.0-SNAPSHOT"
 

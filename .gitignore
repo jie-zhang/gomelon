@@ -1,10 +1,10 @@
 # ignore all dot files;
 .*
 
-# exprot for .gitignore
+# except for .gitignore file;
 !.gitignore
 
-# ignore play! working directory 
+# ignore play! working directory;
 db
 eclipse
 log
