@@ -5,6 +5,8 @@
 <html>
     <head>
         <title>@title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/designer/mycss.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/record.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
         <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
@@ -73,25 +75,54 @@
 					}
 					$("#phoneMsg").text("号码有效").removeClass("errorMsg").addClass("trueMsg");
 				});
+				//根据状态设置行背景色
+				$().ready(function(){
+					var $obj=$('#recordmain #service-status');
+					$obj.each(function(i){
+						var status=$(this).text().trim();
+						if(status=="预约中"){
+							$(this).parent().addClass("row1");
+						}else if(status=="已过期"){
+							$(this).parent().addClass('row2');
+						}else if(status=="已消费"){
+							$(this).parent().addClass('row3');
+						}else if(status=="已取消"){
+							$(this).parent().addClass('row4');
+						}
+					});
+				});
+				
+				
 			})
-			var timer = null;
-			var i=5;
-			function success(){
-				timer=window.setInterval(showTimes,1000);
-				window.setTimeout("go()",6000);
-					
-					if(i==0){
-						clearInterval(timer);
-					}
-					
+			//页面跳转
+				function toPage(page){
+					document.getElementById("page").value=page;
+					var pages=document.getElementById("page").value;
+					var i=parseInt(page);
+					var current="currentpage"+pages;
+					window.location="/recordmain/"+i+"#";
 				}
-			function go( ) {//定义函数
-	            window.location="findAll";//页面跳转
-	    	 }
-			function showTimes(){
-					document.getElementById("times").innerHTML=i;
-					i--;
-				}	
+				//下一页
+				function toNextPage(){
+					var totalPages=document.getElementById("totalPage").value;
+					var currentPage=document.getElementById("page").value;
+					if(totalPages==currentPage){
+						return;
+					}
+					var i=parseInt(currentPage)+1;
+					toPage(i);
+				}
+				//上一页
+				function toUpPage(){
+					var totalPages=document.getElementById("totalPage").value;
+					var currentPage=document.getElementById("page").value;
+					if(1==currentPage){
+						return;
+						}
+					var i=parseInt(currentPage)-1;
+					toPage(i);
+				}
+				
          </script>
     </head>
     <body>
