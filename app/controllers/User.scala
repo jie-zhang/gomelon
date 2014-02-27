@@ -6,6 +6,9 @@ import play.api.data.Forms._
 import play.api.data.Form
 import models.Users
 import scala.util.matching.Regex
+import play.libs.Json
+
+
 object User extends Controller {
 
   val loginForm = Form(
@@ -32,17 +35,16 @@ object User extends Controller {
 	    	  ) 
   )
   	/**
-  	 * 跳转登录页面
+  	 * 进入登录页面
   	 */
 	def login = Action{
 		 Ok(views.html.login(loginForm))
 	}
   	/**
-  	 * 登录信息的验证
-  	 */
+  	 * 登录用户名及密码验证  	 */
   	def tologin = Action{implicit request =>
   	 loginForm.bindFromRequest.fold(
-	    error =>BadRequest(views.html.index("发现错误")), 
+	    error =>BadRequest(views.html.index("鍙戠幇閿欒")), 
 	    {
 	      case(name,password)=>
 	        println(name)
@@ -52,9 +54,9 @@ object User extends Controller {
 	        val isPassword: Boolean= Users.checkPassword(name, password)
 	        println(isPassword)
 	        if(isPassword){
-	         Ok(views.html.loginSuccess("登录成功")).withSession(request.session + ("user" ->name))
+	         Redirect(controllers.record.routes.Records.recordmain(1)).withSession(request.session + ("records" ->"spahome"))
 	        }else{
-	          Ok(views.html.index("密码错误"))
+	          Ok(views.html.index("密码错误"))
 	        }
 	      }else{
 	        Ok(views.html.index("用户名不存在"))
@@ -62,22 +64,25 @@ object User extends Controller {
 	    }
 	)
   	}
+  	/**
+  	 * 登录成功页面
+  	 */
   	def loginSuccess = Action {
-  		Ok(views.html.loginSuccess("登陸成功"))
+  		Ok(views.html.loginSuccess("登录成功"))
   	}
   	/**
-  	 * 跳转注册
+  	 * 进入注册页面
   	 * 
   	 */
   	def register = Action {
   	  Ok(views.html.register(registerForm))
   	}
   	/**
-  	 * 注册用户
+  	 * 后台注册
   	 */
   	def toregister = Action {implicit request =>
   	  registerForm.bindFromRequest.fold(
-  	    error =>BadRequest(views.html.index("发现错误")),
+  	    error =>BadRequest(views.html.index("发现错误")),
   	    {
   	      case(name,(main,confirm),email,phone,sex,(first,second),intro)=>
   	      val isexists = Users.checkUserName(name)
@@ -92,7 +97,7 @@ object User extends Controller {
   	  
   	}
   	/**
-  	 * 个人信息修改
+  	 * 进到用户信息更新页面
   	 */
   	def updateUserInfo = Action{implicit request =>
   	  val name = request.session.get("user").get
@@ -102,7 +107,19 @@ object User extends Controller {
   	    val user: Users= Users.findUserByName(name)
   	    Ok(views.html.updateUser(user,registerForm))
   	  }
-  	   
-  	  
   	}
+  	/**
+  	 * ajax异步验证用户名是否存在
+  	 */
+  	def checkNameisexit(name: String) = Action{
+  	   val isexit = Users.checkUserName(name)
+  	   println("name check")
+  	   println("isexit"+isexit)
+  	   if(isexit){
+  	     Ok("用户名已存在")
+  	   }else{
+  	     Ok("可以使用")
+  	   }
+  	   
+  	 }
 }

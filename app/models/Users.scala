@@ -1,11 +1,23 @@
 package models
 
+import play.api.Play.current
 import java.sql.Date
 import util.MongodbColl
-import com.mongodb.casbah.commons.MongoDBObject
-import com.mongodb.casbah.MongoConnection
+import com.novus.salat._
+import com.novus.salat.annotations._
+import com.novus.salat.dao._
+import com.mongodb.casbah.Imports._
+import play.api.libs.json._
+import play.api.libs.functional.syntax._
 
-case class Users(id: Option[Long], 
+import se.radley.plugin.salat._
+import se.radley.plugin.salat.Binders._
+import mongoContext._
+
+
+
+
+case class Users(id: ObjectId = new ObjectId,
 				name: String,
 				password: String,
 				email: String,
@@ -14,14 +26,16 @@ case class Users(id: Option[Long],
 				sex: Int,
 				status: Int,
 				city: String,
-				intro: String)
+				intro: String
+				)
+object Users extends UserDAO with UserJson
 
-object Users{
-	
+trait UserDAO extends ModelCompanion[Users, ObjectId]{
+	val dao = new SalatDAO[Users, ObjectId](collection = mongoCollection("user")) {}
 	val db = MongodbColl.getDB()
 	val coll = db("user")
 	/**
-	 * 查看用户是否存在	 */
+	 * 鏌ョ湅鐢ㄦ埛鏄惁瀛樺湪	 */
 	def checkUserName(name: String): Boolean = {
 	  val user = coll.find(MongoDBObject("name" -> name))
 	  if(user.hasNext){
@@ -31,7 +45,7 @@ object Users{
 	  return false  
 	}
 	/**
-	 * 查看密码
+	 * 鏌ョ湅瀵嗙爜
 	 */
 	def checkPassword(name: String, password: String):Boolean ={
 	   val user =  coll.find(MongoDBObject("name" -> name))
@@ -42,20 +56,20 @@ object Users{
 	   return false
 	}
 	/**
-	 * 注册用户
+	 * 娉ㄥ唽鐢ㄦ埛
 	 */
 	def toRegister(userName: String, password: String, email: String,phone: String, 
     sex: String, city: String, intro: String){
-	  coll.insert(MongoDBObject("userName" -> userName, "password" -> password, "email" -> email,
+	  coll.insert(MongoDBObject("name" -> userName, "password" -> password, "email" -> email,
 	      "phone" -> phone, "sex" -> sex, "city" -> city, "intro" -> intro))
 	}
 	/**
-	 * 根据用户名查找用户
-	 */
-	def findUserByName(name: String): Users={
-	  val user = coll.find(MongoDBObject("userName" -> name))
-	  var  re:Users = null
-	  while(user.hasNext){
+	 * 鏍规嵁鐢ㄦ埛鍚嶆煡鎵剧敤鎴�	 */
+	def findUserByName(name: String): Users= dao.findOne(MongoDBObject("name" -> name)).get
+	 /* val user = coll.find(MongoDBObject("userName" -> name))
+	  var  re:Users = null*/
+	  
+	  /*while(user.hasNext){
 	    val r = user.next
 	    val id=r.get("_id").toString().toLong
 	    val name = r.get("userName").toString()
@@ -68,7 +82,37 @@ object Users{
 	    val city = r.get("city").toString()
 	    val intro = r.get("intro").toString()
 	    re = new Users(Option(id),name,password,email,phone,pic,sex,status,city,intro)
-	  }
-	   return re
-	}
+	  }*/
+	  
+	
 }
+trait UserJson{
+	  implicit val userJsonWrite = new Writes[Users]{
+	    def writes(u: Users): JsValue = {
+	      Json.obj(
+	    		"id" -> u.id,
+	    		"name" -> u.name,
+	    		"password" -> u.password,
+	    		"email" -> u.email,
+	    		"pic" -> u.pic,
+	    		"phone" -> u.phone,
+	    		"sex" -> u.sex,
+	    		"status" -> u.status,
+	    		"city"	-> u.city,
+	    		"intro" -> u.intro
+	      )
+	    }
+	  }
+	  implicit val productReads = (
+			  (__ \ 'id).read[ObjectId] ~
+			  (__ \ 'name).read[String] ~
+			  (__ \ 'password).read[String] ~
+			  (__ \ 'email).read[String] ~
+			  (__ \ 'phone).read[String] ~
+			  (__ \ 'pic).read[String] ~
+			  (__ \ 'sex).read[Int] ~
+			  (__ \ 'status).read[Int] ~
+			  (__ \ 'city).read[String] ~
+			  (__ \ 'intro).read[String]
+			  )(Users.apply _)
+	}

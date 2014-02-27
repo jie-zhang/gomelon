@@ -3,23 +3,55 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                              controllers.Application.index
+
+GET     /login                         controllers.User.login
+
+POST    /tologin                       controllers.User.tologin
+
+GET     /loginSuccess                  controllers.User.loginSuccess
+
+GET     /register                      controllers.User.register
+
+GET     /toregister                    controllers.User.toregister
+
+# Salons Management
+GET     /checkNameisexit/:name         controllers.User.checkNameisexit(name)
 
 
-GET		/login						controllers.User.login
+# Stylists Management
+GET     /designermain                  controllers.designer.Designer.designermain
 
-POST	/tologin					controllers.User.tologin
+GET     /designersearch                controllers.designer.Designer.designersearch
 
-GET 	/loginSuccess				controllers.User.loginSuccess
+GET     /designerview                  controllers.designer.Designer.designerview
 
-GET 	/register					controllers.User.register
+GET     /designerTask                  controllers.designer.Designer.designerTask
 
-GET 	/toregister					controllers.User.toregister
+# Reservations Management
+GET     /recordmain/:page              controllers.record.Records.recordmain(page:Int) 
 
-# Salon
+GET     /recordview/:id                controllers.record.Records.recordview(id: ObjectId)
+
+GET     /createrecord                  controllers.record.Records.createrecord
+
+POST    /toCreateRecords               controllers.record.Records.toCreateRecords
+
+GET     /addRecord                     controllers.record.Records.addRecord
+
+GET     /selectDesignerRecord          controllers.record.Records.selectDesignerRecord
+
+GET     /cancelRecord/:id              controllers.record.Records.cancelRecord(id: ObjectId)
+
+GET     /overdateRecord/:id            controllers.record.Records.overdateRecord(id: ObjectId)
+
+GET     /finishRecord/:id              controllers.record.Records.finishRecord(id: ObjectId)
+
+
+
+
+
 
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
-
-
