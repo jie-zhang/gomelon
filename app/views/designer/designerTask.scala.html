@@ -1,4 +1,4 @@
-@(message: String)
+@(dates:List[java.util.Date])
 
 @import helper._
 @import helper.twitterBootstrap._
@@ -17,7 +17,6 @@
 				</div>
 			</div>
 	</div>
-		
 		<table cellpadding="0" cellspacing="0" width="750px" border="1px solid gray">
 			<tr>
 				<th rowspan="2"><a href="#">《</a></th><th colspan="8">2014年02月</th><th colspan="4">2014年03月</th><th rowspan="2"><a href="#">》</a></th>
@@ -39,74 +38,16 @@
 			<tr>
 				<th>
 					<table cellpadding="0" cellspacing="0" width="100%" border="1px solid gray">
-						<tr>
-							<th><p>10：00</p></th>
-						</tr>
-						<tr>
-							<th><p>10：30</p></th>
-						</tr>
-						<tr>
-							<th><p>11：00</p></th>
-						</tr>
-						<tr>
-							<th><p>11：30</p></th>
-						</tr>
-						<tr>
-							<th><p>12：00</p></th>
-						</tr>
-						<tr>
-							<th><p>12：30</p></th>
-						</tr>
-						<tr>
-							<th><p>13：00</p></th>
-						</tr>
-						<tr>
-							<th><p>13：30</p></th>
-						</tr>
-						<tr>
-							<th><p>14：00</p></th>
-						</tr>
-						<tr>
-							<th><p>14：30</p></th>
-						</tr>
-						<tr>
-							<th><p>15：00</p></th>
-						</tr>
-						<tr>
-							<th><p>15：30</p></th>
-						</tr>
-						<tr>
-							<th><p>16：00</p></th>
-						</tr>
-						<tr>
-							<th><p>16：30</p></th>
-						</tr>
-						<tr>
-							<th><p>17：00</p></th>
-						</tr>
-						<tr>
-							<th><p>17：30</p></th>
-						</tr>
-						<tr>
-							<th><p>18：00</p></th>
-						</tr>
-						<tr>
-							<th><p>18：30</p></th>
-						</tr>
-						<tr>
-							<th><p>19：00</p></th>
-						</tr>
-						<tr>
-							<th><p>19：30</p></th>
-						</tr>
-						<tr>
-							<th><p>20：00</p></th>
-						</tr>
+						@dates.reverse.map{re=>
+							<tr>
+								<th><p>@re.format("HH:mm")</p></th>
+							</tr>	
+						}
 					</table>
 				</th>
 				<th colspan="12">
 					<table cellpadding="0" cellspacing="0" width="100%" height="1080px" class="designerTask">
-					@for(i <- 0 until 21){
+					@for(i <- 0 until 25){
 						<tr>
 							<th><a href="#"><span>×</span></a></th>
 							<th><a href="#"><span>×</span></a></th>
@@ -126,69 +67,11 @@
 				</th>
 				<th>
 					<table cellpadding="0" cellspacing="0" width="100%" border="1px solid gray">
-						<tr>
-							<th><p>10：00</p></th>
-						</tr>
-						<tr>
-							<th><p>10：30</p></th>
-						</tr>
-						<tr>
-							<th><p>11：00</p></th>
-						</tr>
-						<tr>
-							<th><p>11：30</p></th>
-						</tr>
-						<tr>
-							<th><p>12：00</p></th>
-						</tr>
-						<tr>
-							<th><p>12：30</p></th>
-						</tr>
-						<tr>
-							<th><p>13：00</p></th>
-						</tr>
-						<tr>
-							<th><p>13：30</p></th>
-						</tr>
-						<tr>
-							<th><p>14：00</p></th>
-						</tr>
-						<tr>
-							<th><p>14：30</p></th>
-						</tr>
-						<tr>
-							<th><p>15：00</p></th>
-						</tr>
-						<tr>
-							<th><p>15：30</p></th>
-						</tr>
-						<tr>
-							<th><p>16：00</p></th>
-						</tr>
-						<tr>
-							<th><p>16：30</p></th>
-						</tr>
-						<tr>
-							<th><p>17：00</p></th>
-						</tr>
-						<tr>
-							<th><p>17：30</p></th>
-						</tr>
-						<tr>
-							<th><p>18：00</p></th>
-						</tr>
-						<tr>
-							<th><p>18：30</p></th>
-						</tr>
-						<tr>
-							<th><p>19：00</p></th>
-						</tr>
-						<tr>
-							<th><p>19：30</p></th>
-						</tr>
-						<tr>
-							<th><p>20：00</p></th>
-						</tr>
+						@dates.reverse.map{re=>
+							<tr>
+								<th><p>@re.format("HH:mm")</p></th>
+							</tr>
+						}
 					</table>
 				</th>
 			</tr>

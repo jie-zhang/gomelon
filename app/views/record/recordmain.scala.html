@@ -9,18 +9,19 @@
 		<p>总计<span>@count</span>个预约</p>
 		<input type="hidden" name="page" id="page" value="@page">
 		<input type="hidden" name="totalPage" id="totalPage" value="@pages">
-		<div>                           
-                                         开始日期：<input type="date">&nbsp;&nbsp;
+		<div>
+		    <form method="get" action="@controllers.record.routes.Records.findRecordByCondition">                    
+                                         开始日期：<input type="date" name="serviceStart">&nbsp;&nbsp;
                                         
-                                          技师名：<input name="date" style="width:70px;"> &nbsp;&nbsp;
-            	服务状态：<select>
+                                          技师名：<input name="serviceDesigner" style="width:70px;"> &nbsp;&nbsp;
+            	服务状态：<select name="serviceStatus">
             		<option value="0">预约中 </option>
             		<option value="1">已消费</option>
             		<option value="2">已过期</option>
             		<option value="-1">已取消</option>
             	</select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                               
-            <input type="button" value="搜索" onclick="toPage(1);"/>
-           
+            <input type="submit" value="搜索"/>
+           </form>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
             <a href="@controllers.record.routes.Records.addRecord">添加预约</a>

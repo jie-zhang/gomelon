@@ -6,6 +6,7 @@
     <head>
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/designer/mycss.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/reservation/reservation.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/record.css")">
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
@@ -31,7 +32,14 @@
 						$("#nameMsg").text("用户名无效").removeClass("trueMsg").addClass("errorMsg");
 						return;
 					}
-					$("#nameMsg").text("可以使用").removeClass("errorMsg").addClass("trueMsg");
+					
+					$.get(
+					"/checkNameisexit/"+name,
+					{name:"zhangsan"},
+					function(data){
+						$("#nameMsg").text(data).removeClass("errorMsg").addClass("trueMsg");
+					});
+					
 				});
 				$("#password-main").blur(function(){
 					var password=$(this).val();

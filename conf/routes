@@ -48,5 +48,9 @@ GET 	/overdateRecord/:id			controllers.record.Records.overdateRecord(id: ObjectI
 
 GET 	/finishRecord/:id			controllers.record.Records.finishRecord(id: ObjectId)
 
+GET		/findRecordByCondition		controllers.record.Records.findRecordByCondition
+
+#add reservation
+GET		/hairReservation			controllers.reservation.Reservations.hairReservation
 
 
