@@ -1,7 +1,14 @@
 # General
-general.welcome=悦美月容网，欢迎您！
-general.intro=宇宙首家动漫人物美发美容沙龙检索预约平台
-general.powerby=苏州隆泰信息技术有限公司
+site.welcome=悦美月容网，欢迎您！
+site.intro=宇宙首家动漫人物美发美容沙龙检索预约平台
+site.powerby=苏州隆泰信息技术有限公司
+site.title=中国首家美发美容查询&预约网站｜美范网
+site.description=美容院・美容室・ヘアサロン・ネイルサロン・エステサロン・リラクゼーションサロンが見つかる日本最大級の美容・キレイ総合情報サイト、ホットペッパービューティー。スタイル、ブログ、口コミをチェックして、気になるサロンへ２４時間いつでもネット予約OK。美容・キレイサロンを検索・予約するならホットペッパービューティー。
+site.keywords=美容,キレイ,美容院,美容室,ヘアサロン,ネイルサロン,まつげサロン,リラクサロン,エステサロン,ヘアカタログ,ネイルカタログ
+site.copyright=Copyright &copy; RONTECH Co., Ltd. All rights reserved.
+
+
+	
 
 # Salon
 salon.show=展示所有沙龙

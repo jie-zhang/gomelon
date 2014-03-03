@@ -1,7 +1,64 @@
 @(message: String)
 
-@main("Welcome to Play") {
+@main(Messages("site.title")) {
 
-    @play20.welcome(message)
+	<!-- ↓mainContents -->
+		<div id="mainContents">
+		<div class="maincatch">
+		<div class="maincatchLink mR2">
+		<a target="_blank" title="ご掲載をお考えの方へ" onclick="customLinkLog('Top Salon Link');" href="http://beauty.hotpepper.jp/doc/keisai/keisai.html">掲載をご希望のサロン様はこちら</a>
+		</div>
+		<div class="mainSubtilte">
+		<img alt="全国のビューティーサロン検索・予約" src="@routes.Assets.at("images/zenkoku_beautysalon.png")" width="281" height="18"/>
+		</div>
+		<ul class="cFix mainLink">
+		<li class="iS balloon fr pL20 mL10 fgDGray">口コミ数 国内最大級</li>
+		<li class="iS point fr pL20 mL10 fgDGray">ポイント２%が貯まる</li>
+		<li class="iS pcweb fr pL20 mL10 fgDGray">２４時間ネット予約・空席確認</li>
+		</ul>
+		</div>
+
+		<div class="mT13 mBN20 cFix">
+		<ul class="mainImage" id="jsiMainImage">
+		<li class="current">
+		<a href="http://beauty.hotpepper.jp/"><img alt="ヘアサロン予約" src="http://imgbp.hotp.jp/CSP/img/top/mainImg_hair.jpg?switch=20140227" width="730" height="397" /></a>
+		</li>
+		<li>
+		<a href="http://beauty.hotpepper.jp/nail/"><img alt="ネイル・まつげサロン予約" src="http://imgbp.hotp.jp/CSP/img/top/mainImg_nail.jpg?switch=20140227" width="730" height="397" /></a>
+		</li>
+		<li>
+		<a href="http://beauty.hotpepper.jp/relax/"><img alt="リラクサロン予約" src="http://imgbp.hotp.jp/CSP/img/top/mainImg_relax.jpg?switch=20140227" width="730" height="397" /></a>
+		</li>
+		<li>
+		<a href="http://beauty.hotpepper.jp/esthe/"><img alt="エステサロン予約" src="http://imgbp.hotp.jp/CSP/img/top/mainImg_esthe.jpg?switch=20140227" width="730" height="397" /></a>
+		</li>
+		</ul>
+		<div class="imgNaviWrapper">
+		<div class="naviBar" id="jsiNaviBar"></div>
+		<ul class="mainImage_navi" id="jsiImageNavi">
+		<li class="hair_reserve currentNav">
+		<a href="http://beauty.hotpepper.jp/">ヘアサロン予約</a>
+		</li>
+		<li class="nail_reserve">
+		<a href="http://beauty.hotpepper.jp/nail/">ネイル・まつげサロン予約</a>
+		</li>
+		<li class="relax_reserve">
+		<a href="http://beauty.hotpepper.jp/relax/">リラクサロン予約（整体・カイロ・酸素・温浴）</a>
+		</li>
+		<li class="esthe_reserve">
+		<a href="http://beauty.hotpepper.jp/esthe/">エステサロン予約（フェイシャル・ボディ・脱毛）</a>
+		</li>
+		</ul>
+		</div>
+		</div>
+
+		<div class="cFix mT34">
+		<div class="cFix">
+
+		</div>
+		</div>
+		</div>
+
+		<!-- ↑mainContents -->
 
 }

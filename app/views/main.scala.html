@@ -1,139 +1,136 @@
-@(title: String)(content: Html)
+@(title: String, nav: String = "hair-salon")(content: Html)
 
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/designer/mycss.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/reservation/reservation.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/record.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
-        <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
-        <script language="javascript" type="text/javascript">
-			$(function(){
-				$("#emailLogin").click(function(){
-					$("#usernameinf").text("邮箱：");
-					$("#name").attr("name","email");
-				});
-				$("#nameLogin").click(function(){
-					$("#usernameinf").text("用户名：");
-					$("#name").attr("name","name");
-				});
-				$("#provice").click(function(){
-					var provices=new Array("吉林省","辽宁省");
-				});
-				$("#name").blur(function(){
-					var name=$(this).val();
-					var isname=/^[a-zA-Z][a-zA-Z0-9_]{4,15}$/;
-					
-					if(!isname.test(name)){
-						$("#nameMsg").text("用户名无效").removeClass("trueMsg").addClass("errorMsg");
-						return;
-					}
-					
-					$.get(
-					"/checkNameisexit/"+name,
-					{name:"zhangsan"},
-					function(data){
-						$("#nameMsg").text(data).removeClass("errorMsg").addClass("trueMsg");
-					});
-					
-				});
-				$("#password-main").blur(function(){
-					var password=$(this).val();
-					var ispassword=/^[a-zA-Z]\w{5,17}$/;
-					if(!ispassword.test(password)){
-						$("#passwordMainMsg").text("密码无效").removeClass("trueMsg").addClass("errorMsg");
-						return;
-					}
-					$("#passwordMainMsg").text("可以使用").removeClass("errorMsg").addClass("trueMsg");
-				});
-				
-				$("#password-confirm").blur(function(){
-					var password=$(this).val();
-					var ispassword=/^[a-zA-Z]\w{5,17}$/;
-					if(!ispassword.test(password)){
-						$("#passwordConfirmMsg").text("密码无效").removeClass("trueMsg").addClass("errorMsg");
-						return;
-					}
-					var firstPassword=$("#password-main").val();
-					if(password!=firstPassword){
-						$("#passwordConfirmMsg").text("两次密码输入需一致").removeClass("trueMsg").addClass("errorMsg");
-						return;
-					}
-					$("#passwordConfirmMsg").text("输入正确").removeClass("errorMsg").addClass("trueMsg");
-				});
-				$("#email").blur(function(){
-					var email=$(this).val();
-					var isemail=/^\w+([-+.]\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-					if(!isemail.test(email)){
-						$("#emailMsg").text("邮箱无效").removeClass("trueMsg").addClass("errorMsg");
-						return;
-					}
-					$("#emailMsg").text("可以使用").removeClass("errorMsg").addClass("trueMsg");
-				});
-				$("#phone").blur(function(){
-					var phone=$(this).val();
-					var isphone=/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d{8}$/;
-					if(!isphone.test(phone)){
-						$("#phoneMsg").text("号码无效").removeClass("trueMsg").addClass("errorMsg");
-						return;
-					}
-					$("#phoneMsg").text("号码有效").removeClass("errorMsg").addClass("trueMsg");
-				});
-				//根据状态设置行背景色
-				$().ready(function(){
-					var $obj=$('#recordmain #service-status');
-					$obj.each(function(i){
-						var status=$(this).text().trim();
-						if(status=="预约中"){
-							$(this).parent().addClass("row1");
-						}else if(status=="已过期"){
-							$(this).parent().addClass('row2');
-						}else if(status=="已消费"){
-							$(this).parent().addClass('row3');
-						}else if(status=="已取消"){
-							$(this).parent().addClass('row4');
-						}
-					});
-				});
-				
-				
-			})
-			//页面跳转
-				function toPage(page){
-					document.getElementById("page").value=page;
-					var pages=document.getElementById("page").value;
-					var i=parseInt(page);
-					var current="currentpage"+pages;
-					window.location="/recordmain/"+i+"#";
-				}
-				//下一页
-				function toNextPage(){
-					var totalPages=document.getElementById("totalPage").value;
-					var currentPage=document.getElementById("page").value;
-					if(totalPages==currentPage){
-						return;
-					}
-					var i=parseInt(currentPage)+1;
-					toPage(i);
-				}
-				//上一页
-				function toUpPage(){
-					var totalPages=document.getElementById("totalPage").value;
-					var currentPage=document.getElementById("page").value;
-					if(1==currentPage){
-						return;
-						}
-					var i=parseInt(currentPage)-1;
-					toPage(i);
-				}
-				
-         </script>
-    </head>
-    <body>
-        @content
-    </body>
+	<head>
+	<title>@title</title>
+	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/tempindex.css")">
+	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+	<script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")" type="text/javascript"></script>
+	<script src="@routes.Assets.at("javascripts/tempmain.js")" type="text/javascript"></script>
+
+	<meta name="robots" content="index, follow" />
+	<meta name="robots" content="noodp" />
+	<meta name="robots" content="noydir" />
+	<meta name="description" content="@Messages("site.description")"/>
+	<meta name="keywords" content="@Messages("site.keywords")"/>
+	<meta name="copyright" content="@Messages("site.copyright")"/>
+
+	</head>
+
+
+	<body id="pageTop">
+	<!-- ↓header -->
+	<div id="headerWrapper">
+	<div id="header">
+	<h1 id="headSummary">国内最大級の美容室・リラク＆ビューティーサロン検索・予約サイト</h1>
+	<div id="logoNavi">
+	<div id="logo">
+	<a href="http://sz-rontech.co.jp" class="logo cS offL">Hot Pepper Beauty 国内最大級のヘアサロン ・リラク＆ビューティーサロン検索・予約サイト PRODUCED BY RECRUIT</a>
+	</div>
+	<ul class="user cFix">
+	<li class="fr pL15">
+	<a href="javascript:void(0);" id="faq" class="iS arrowR">ヘルプ</a>
+	</li>
+	<li class="fr pL15">
+	<a href="https://beauty.hotpepper.jp/CSP/my/myPage/" class="iS arrowR">マイページ</a>
+	</li>
+	</ul>
+	<ul class="move cFix">
+	<li class="fl"><a href="http://beauty.hotpepper.jp/" class="cS salon">ヘアサロン</a></li>
+	<li class="fl"><a href="http://beauty.hotpepper.jp/catalog/" class="cS catalog">ヘアカタログ</a></li>
+	<li class="fl"><a href="http://beauty.hotpepper.jp/nail/" class="cS nail">ネイル・まつげサロン</a></li>
+	<li class="fl"><a href="http://beauty.hotpepper.jp/nail_catalog/" class="cS nailCatalog">ネイルカタログ</a></li>
+	<li class="fl"><a href="http://beauty.hotpepper.jp/relax/" class="cS relax">リラクサロン</a></li>
+	<li class="fl"><a href="http://beauty.hotpepper.jp/esthe/" class="cS esthe">エステサロン</a></li>
+	</ul>
+	</div>
+	</div>
+	</div>
+	<!-- ↑header -->
+
+	<!-- ↓wrapper -->
+	<div id="wrapper">
+	<!-- ↓contents -->
+	<div id="contents" class="cFix">
+	<!-- ↓mainContents -->
+		@content
+	<!-- ↑mainContents -->
+	</div>
+	<!-- ↑contents -->
+	</div>
+	<!-- ↑wrapper -->
+
+
+	<!-- ↓footerwrapper -->
+	<div class="footerwrapper">
+	<!-- ↓footermaincontents -->
+	<div class="footermaincontents mT25 cFix">
+	<!-- ↓seoContents -->
+
+	<!-- ↑seoContents -->
+	<!-- ↓footercontents -->
+	<div class="footercontents">
+	<!-- ↓footer -->
+	<script type="text/javascript">
+	//<![CDATA[
+	$(function() {
+			$beauty.linkPopup("mterms", {url: "http://cmn.point.recruit.co.jp/terms/terms.html", name: "hpbguide", width: 1020, height: 630});
+			$beauty.linkPopup("terms", {url: "http://beauty.hotpepper.jp/doc/terms/popup_serviceterms.html", name: "hpbguide", width: 600, height: 630});
+			$beauty.linkPopup("privacy", {url: "http://cmn.point.recruit.co.jp/policy/privacy.html", name: "hpbguide", width: 1020, height: 630});
+			$beauty.linkPopup("guide", {url: "http://beauty.hotpepper.jp/doc/guide/guide.html", name: "hpbguide", width: 600, height: 630});
+			$beauty.linkPopup("faq", {url: "http://beauty.help.hotpepper.jp", name: "hpbguide", width: 1020, height: 700});
+			});
+//]]>
+</script>
+<div id="footer" class="cFix">
+<div id="copyrightnew">
+<a href="http://www.recruit-lifestyle.co.jp/" target="_blank"><img src="@routes.Assets.at("images/footercopyright.gif")" alt="(C) Recruit Lifestyle Co.,Ltd." /></a>
+</div>
+<div class="postSalonInfo">
+サロンの皆様へ<a target="_blank" title="ご掲載をお考えの方へ" href="http://beauty.hotpepper.jp/doc/keisai/keisai.html" onclick="customLinkLog('Footer Salon Link');">ご掲載をお考えの方へ</a>
+</div>
+<ul id="footerLinks">
+<li><a href="javascript:void(0);" id="mterms">リクルートID規約</a></li>
+<li><a href="javascript:void(0);" id="terms">利用規約</a></li>
+<li><a href="javascript:void(0);" id="privacy">プライバシーポリシー</a></li>
+<li><a href="javascript:void(0);" id="guide">ご利用ガイド</a></li>
+</ul>
+</div>
+<script type="text/javascript" src="/VOS/vos.js"></script><!-- -->
+<!-- ↑footer -->
+</div>
+<!-- ↑footercontents -->
+</div>
+<!-- ↑footermaincontents -->
+</div>
+<!-- ↑footerwrapper -->
+<!-- mainImage
+<script type="text/javascript">
+$('.mainImage').animate({
+		'opacity': 0,
+		});
+</script>
+//mainImage -->
+<!-- ↓siteCatalyst -->
+<script type="text/javascript">
+pageName = "bt:top:sitetop:site_top";
+channel = "beauty";
+subSiteSection = "BPTP000001";
+siteDivision = "beauty";
+</script>
+<script type="text/javascript" src="/DEV/DEV_OPEN/log/js/s_code.js"></script>
+<script type="text/javascript" src="/DEV/DEV_OPEN/log/js/logTeam.js"></script>
+<!-- ↑siteCatalyst -->
+<!-- ad_tag_start -->
+<!-- ad_tag_end -->
+<!-- adtag_top_pc_front.html start -->
+<!-- adtag_top_pc_front.html end -->
+
+
+</body>
+
+
+
 </html>
