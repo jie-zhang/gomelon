@@ -49,6 +49,10 @@ GET     /finishRecord/:id              controllers.record.Records.finishRecord(i
 
 
 
+GET		/findRecordByCondition		controllers.record.Records.findRecordByCondition
+
+#add reservation
+GET		/hairReservation			controllers.reservation.Reservations.hairReservation
 
 
 
