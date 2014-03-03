@@ -4,7 +4,7 @@ import play.Project._
 
 object ApplicationBuild extends Build {
 
-  val appName         = "test-scala-mongo"
+  val appName         = "scala-mongo"
   val appVersion      = "1.0-SNAPSHOT"
 
   val appDependencies = Seq(

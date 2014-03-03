@@ -3,50 +3,51 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index
+GET     /                              controllers.Application.index
 
-# Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /login                         controllers.User.login
 
-GET		/login						controllers.User.login
+POST    /tologin                       controllers.User.tologin
 
-POST	/tologin					controllers.User.tologin
+GET     /loginSuccess                  controllers.User.loginSuccess
 
-GET 	/loginSuccess				controllers.User.loginSuccess
+GET     /register                      controllers.User.register
 
-GET 	/register					controllers.User.register
+GET     /toregister                    controllers.User.toregister
 
-GET 	/toregister					controllers.User.toregister
+# Salons Management
+GET     /checkNameisexit/:name         controllers.User.checkNameisexit(name)
 
-GET		/checkNameisexit/:name		controllers.User.checkNameisexit(name)
-#designer managment
 
-GET 	/designermain				controllers.designer.Designer.designermain
+# Stylists Management
+GET     /designermain                  controllers.designer.Designer.designermain
 
-GET		/designersearch				controllers.designer.Designer.designersearch
+GET     /designersearch                controllers.designer.Designer.designersearch
 
-GET		/designerview				controllers.designer.Designer.designerview
+GET     /designerview                  controllers.designer.Designer.designerview
 
-GET     /designerTask				controllers.designer.Designer.designerTask
+GET     /designerTask                  controllers.designer.Designer.designerTask
 
-#record managment
-GET 	/recordmain/:page			controllers.record.Records.recordmain(page:Int) 
+# Reservations Management
+GET     /recordmain/:page              controllers.record.Records.recordmain(page:Int) 
 
-GET 	/recordview/:id				controllers.record.Records.recordview(id: ObjectId)
+GET     /recordview/:id                controllers.record.Records.recordview(id: ObjectId)
 
-GET		/createrecord				controllers.record.Records.createrecord
+GET     /createrecord                  controllers.record.Records.createrecord
 
-POST	/toCreateRecords			controllers.record.Records.toCreateRecords
+POST    /toCreateRecords               controllers.record.Records.toCreateRecords
 
-GET		/addRecord					controllers.record.Records.addRecord
+GET     /addRecord                     controllers.record.Records.addRecord
 
-GET		/selectDesignerRecord		controllers.record.Records.selectDesignerRecord
+GET     /selectDesignerRecord          controllers.record.Records.selectDesignerRecord
 
-GET 	/cancelRecord/:id			controllers.record.Records.cancelRecord(id: ObjectId)
+GET     /cancelRecord/:id              controllers.record.Records.cancelRecord(id: ObjectId)
 
-GET 	/overdateRecord/:id			controllers.record.Records.overdateRecord(id: ObjectId)
+GET     /overdateRecord/:id            controllers.record.Records.overdateRecord(id: ObjectId)
 
-GET 	/finishRecord/:id			controllers.record.Records.finishRecord(id: ObjectId)
+GET     /finishRecord/:id              controllers.record.Records.finishRecord(id: ObjectId)
+
+
 
 GET		/findRecordByCondition		controllers.record.Records.findRecordByCondition
 
@@ -54,3 +55,7 @@ GET		/findRecordByCondition		controllers.record.Records.findRecordByCondition
 GET		/hairReservation			controllers.reservation.Reservations.hairReservation
 
 
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
