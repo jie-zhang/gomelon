@@ -50,6 +50,10 @@ GET     /salon/:salonId/Stylists       controllers.Stylists.findBySalon(salonId:
 
 
 
+GET		/findRecordByCondition		controllers.record.Records.findRecordByCondition
+
+#add reservation
+GET		/hairReservation			controllers.reservation.Reservations.hairReservation
 
 
 

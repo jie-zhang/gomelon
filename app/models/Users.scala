@@ -42,6 +42,7 @@ trait UserDAO extends ModelCompanion[Users, ObjectId]{
 	    println(user.next)
 	     return true
 	  }
+	  println("user is not exits")
 	  return false  
 	}
 	/**

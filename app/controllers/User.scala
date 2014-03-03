@@ -113,11 +113,12 @@ object User extends Controller {
   	 */
   	def checkNameisexit(name: String) = Action{
   	   val isexit = Users.checkUserName(name)
-  	   println("name check")
+  	   println("name check "+name)
   	   println("isexit"+isexit)
   	   if(isexit){
   	     Ok("用户名已存在")
   	   }else{
+  	     println("for ajax ..........")
   	     Ok("可以使用")
   	   }
   	   

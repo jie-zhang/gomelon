@@ -8,8 +8,9 @@ import models.Record
 import org.bson.types.ObjectId
 import views._
 import se.radley.plugin.salat.Binders._
-
 import models._
+import com.mongodb.casbah.commons.MongoDBObject
+
 
 object Records extends Controller{
   val pageSize:Int = 5	 //每个页面有多少记录
@@ -50,6 +51,49 @@ object Records extends Controller{
 	  }
 	  Ok(views.html.record.recordmain(records,count,pages,page))
 	}
+  	/**
+  	 * 条件检索查询
+  	 */
+  	def findRecordByCondition = Action {implicit request =>
+  	  val re = request.session.get("records").get
+  	  val designer = request.getQueryString("serviceDesigner")
+  	  val serviceStart = request.getQueryString("serviceStart")
+  	  val serviceStatus = request.getQueryString("serviceStatus")
+  	  /*designer match{
+  	    case Some(e)=>e
+  	    case _=>None
+  	  }*/
+  	  val builder = MongoDBObject.newBuilder
+  	  builder +="store" -> re
+  	  println("designer..."+designer.get)
+  	  println("serviceStart!=None "+(!(serviceStart.get).equals("")))
+  	  if(!(designer.get).equals("")){
+  	    builder +="serviceDesigner" -> designer.get
+  	  }
+  	  if(!(serviceStart.get).equals("")){
+  	    builder +="serviceStart" -> serviceStart.get
+  	  }
+  	  if(serviceStatus!=None){
+  	    builder +="serviceStatus" -> serviceStatus.get.toInt
+  	  }
+  	  val query=builder.result
+  	  val records = Record.findByQuery(query, 1, pageSize)
+  	  val count = Record.countByCondition(query)
+	  var pages:Int = 0
+	  if(count % pageSize == 0){
+	    pages = count.toInt/ pageSize
+	  }else{
+		pages = count.toInt/pageSize+1
+	  }
+  	  
+  	   Ok(views.html.record.recordmain(records,count,pages,1))
+  	}
+  	  	  
+  	  	    
+  	  		
+	      
+	    
+  	
   	/**
   	 * 预约记录详细查看
   	 */
