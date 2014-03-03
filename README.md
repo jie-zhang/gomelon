@@ -12,5 +12,4 @@ a practical pj which try the tech scala and mongodb and so on.
 - zewen-wu
 - lu-zheng
 
-we are members of company `suzhou rontech`.
-www.sz-rontech.com
+We are members of company [suzhou rontech](www.sz-rontech.com).
