@@ -24,26 +24,26 @@
 	<!-- ↓header -->
 	<div id="headerWrapper">
 	<div id="header">
-	<h1 id="headSummary">国内最大級の美容室・リラク＆ビューティーサロン検索・予約サイト</h1>
+	<h1 id="headSummary">@Messages("main.headSummary")</h1>
 	<div id="logoNavi">
 	<div id="logo">
-	<a href="http://sz-rontech.co.jp" class="logo cS offL">Hot Pepper Beauty 国内最大級のヘアサロン ・リラク＆ビューティーサロン検索・予約サイト PRODUCED BY RECRUIT</a>
+	<a href="@routes.Application.index" class="logo cS offL">@Messages("main.headSummary")</a>
 	</div>
 	<ul class="user cFix">
 	<li class="fr pL15">
-	<a href="javascript:void(0);" id="faq" class="iS arrowR">ヘルプ</a>
+	<a href="javascript:void(0);" id="faq" class="iS arrowR">@Messages("main.help")</a>
 	</li>
 	<li class="fr pL15">
-	<a href="https://beauty.hotpepper.jp/CSP/my/myPage/" class="iS arrowR">マイページ</a>
+	<a href="/CSP/my/myPage/" class="iS arrowR">@Messages("main.myPage")</a>
 	</li>
 	</ul>
 	<ul class="move cFix">
-	<li class="fl"><a href="http://beauty.hotpepper.jp/" class="cS salon">ヘアサロン</a></li>
-	<li class="fl"><a href="http://beauty.hotpepper.jp/catalog/" class="cS catalog">ヘアカタログ</a></li>
-	<li class="fl"><a href="http://beauty.hotpepper.jp/nail/" class="cS nail">ネイル・まつげサロン</a></li>
-	<li class="fl"><a href="http://beauty.hotpepper.jp/nail_catalog/" class="cS nailCatalog">ネイルカタログ</a></li>
-	<li class="fl"><a href="http://beauty.hotpepper.jp/relax/" class="cS relax">リラクサロン</a></li>
-	<li class="fl"><a href="http://beauty.hotpepper.jp/esthe/" class="cS esthe">エステサロン</a></li>
+	<li class="fl"><a href="@routes.Salons.index" class="cS salon">@Messages("main.hairSalon")</a></li>
+	<li class="fl"><a href="@routes.Styles.index" class="cS catalog">@Messages("main.hairCatalog")</a></li>
+	<li class="fl"><a href="@routes.Salons.index" class="cS nail">@Messages("main.nailSalon")</a></li>
+	<li class="fl"><a href="@routes.Styles.index" class="cS nailCatalog">@Messages("main.nailCatalog")</a></li>
+	<li class="fl"><a href="@routes.Salons.index" class="cS relax">@Messages("main.relaxSalon")</a></li>
+	<li class="fl"><a href="@routes.Salons.index" class="cS esthe">@Messages("main.estheSalon")</a></li>
 	</ul>
 	</div>
 	</div>
@@ -77,25 +77,25 @@
 	//<![CDATA[
 	$(function() {
 			$beauty.linkPopup("mterms", {url: "http://cmn.point.recruit.co.jp/terms/terms.html", name: "hpbguide", width: 1020, height: 630});
-			$beauty.linkPopup("terms", {url: "http://beauty.hotpepper.jp/doc/terms/popup_serviceterms.html", name: "hpbguide", width: 600, height: 630});
+			$beauty.linkPopup("terms", {url: "/terms/popup_serviceterms.html", name: "hpbguide", width: 600, height: 630});
 			$beauty.linkPopup("privacy", {url: "http://cmn.point.recruit.co.jp/policy/privacy.html", name: "hpbguide", width: 1020, height: 630});
-			$beauty.linkPopup("guide", {url: "http://beauty.hotpepper.jp/doc/guide/guide.html", name: "hpbguide", width: 600, height: 630});
-			$beauty.linkPopup("faq", {url: "http://beauty.help.hotpepper.jp", name: "hpbguide", width: 1020, height: 700});
+			$beauty.linkPopup("guide", {url: "/guide/guide.html", name: "hpbguide", width: 600, height: 630});
+			$beauty.linkPopup("faq", {url: "http://beauty.help.rontechtodo.jp", name: "hpbguide", width: 1020, height: 700});
 			});
 //]]>
 </script>
 <div id="footer" class="cFix">
 <div id="copyrightnew">
-<a href="http://www.recruit-lifestyle.co.jp/" target="_blank"><img src="@routes.Assets.at("images/footercopyright.gif")" alt="(C) Recruit Lifestyle Co.,Ltd." /></a>
+<a href="@routes.Application.index" target="_blank"><img src="@routes.Assets.at("images/footercopyright.gif")" alt="(C) Rontech Lifestyle Co.,Ltd." /></a>
 </div>
 <div class="postSalonInfo">
-サロンの皆様へ<a target="_blank" title="ご掲載をお考えの方へ" href="http://beauty.hotpepper.jp/doc/keisai/keisai.html" onclick="customLinkLog('Footer Salon Link');">ご掲載をお考えの方へ</a>
+@Messages("main.toSalonOwners")<a target="_blank" title="@Messages("main.wantToJoin")" href="/doc/keisai/keisai.html" onclick="customLinkLog('Footer Salon Link');">@Messages("main.wantToJoin")</a>
 </div>
 <ul id="footerLinks">
-<li><a href="javascript:void(0);" id="mterms">リクルートID規約</a></li>
-<li><a href="javascript:void(0);" id="terms">利用規約</a></li>
-<li><a href="javascript:void(0);" id="privacy">プライバシーポリシー</a></li>
-<li><a href="javascript:void(0);" id="guide">ご利用ガイド</a></li>
+<li><a href="javascript:void(0);" id="mterms">@Messages("main.idUsePolicy")</a></li>
+<li><a href="javascript:void(0);" id="terms">@Messages("main.usePolicy")</a></li>
+<li><a href="javascript:void(0);" id="privacy">@Messages("main.securityPolicy")</a></li>
+<li><a href="javascript:void(0);" id="guide">@Messages("main.userGuide")</a></li>
 </ul>
 </div>
 <script type="text/javascript" src="/VOS/vos.js"></script><!-- -->

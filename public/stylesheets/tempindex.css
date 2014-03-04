@@ -56,7 +56,7 @@ a:hover .imgFrame {
  ************************************************************/
 
 body, input, select, table, td, li ,a {
-	font-family: 'ＭＳ Ｐゴシック', 'MS P Gothic', 'メイリオ', Meiryo, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'Osaka', arial, sans-serif, verdana, Helvetica;
+	font-family: 'Microsoft YaHei', Arial, Helvetica, MS PGothic, sans-serif; 
 }
 body, input, select, table {
 	color: #333333;
@@ -237,7 +237,7 @@ h1, h2 {
 #copyrightnew p a {
 	font-size: 10px;
 	font-weight: bold;
-	font-family: 'メイリオ',Meiryo,'ヒラギノ角ゴ Pro W3','ＭＳ Ｐゴシック',MS PGothic,sans-serif;
+	font-family: 'Microsoft YaHei', Arial, Helvetica, MS PGothic, sans-serif;
 	line-height: 2;
 	color: #435B67 !important;
 	text-decoration: underline !important;
@@ -437,7 +437,7 @@ h1, h2 {
 	font-weight: bold;
 	line-height: 120%;
 	font-size: 10px;
-	font-family: 'メイリオ', 'Meiryo', 'ＭＳ Ｐゴシック', 'MS P Gothic', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'Osaka', arial, sans-serif, verdana, Helvetica;
+	font-family: 'Microsoft YaHei', Arial, Helvetica, MS PGothic, sans-serif; 
 }
 
 .grayPointBody p span,
@@ -598,7 +598,7 @@ div.skinHeadingWrapper2 {
 .skinHeadingWrapper2 h3 {
 	font-size:13px;
 	color:#444444;
-	font-family: 'メイリオ', Meiryo, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'ＭＳ Ｐゴシック', 'MS P Gothic', 'Osaka', arial, sans-serif, verdana, Helvetica;
+	font-family: 'Microsoft YaHei', Arial, Helvetica, MS PGothic, sans-serif; 
 	}
 
 /* 見出しの画像テキスト */
@@ -1429,7 +1429,7 @@ text-align:right;
 	width: 100%;
 	height: 100%;
 	border: none;
-	font-family: 'メイリオ', Meiryo, 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'ＭＳ Ｐゴシック', 'MS P Gothic', 'Osaka', arial, sans-serif, verdana, Helvetica;
+	font-family: 'Microsoft YaHei', Arial, Helvetica, MS PGothic, sans-serif; 
 	font-weight: bold;
 	cursor: pointer;
 }
