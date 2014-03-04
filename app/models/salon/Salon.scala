@@ -48,6 +48,16 @@ object Salon {
         )
     }
 
+    def save(salon: Salon) = {
+        SalonDAO.save(
+            Salon(
+		id = salon.id,
+                label = salon.label
+            )
+        )
+
+    }
+
     def delete(id: String) {
         SalonDAO.remove(MongoDBObject("_id" -> new ObjectId(id)))
     }

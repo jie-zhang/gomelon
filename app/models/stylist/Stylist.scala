@@ -53,7 +53,17 @@ object Stylist {
         )
     }
 
-    def delete(id: String) {
+    def save(stylist: Stylist) = {
+        StylistDAO.save(
+            Stylist(
+		id = stylist.id,
+                label = stylist.label,
+                salonId = stylist.salonId
+            )
+        )
+    }
+
+   def delete(id: String) {
         StylistDAO.remove(MongoDBObject("_id" -> new ObjectId(id)))
     }
 
