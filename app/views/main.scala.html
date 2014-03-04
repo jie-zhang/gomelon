@@ -1,4 +1,4 @@
-@(title: String, nav: String = "hair-salon")(content: Html)
+@(title: String, nav: String = "top")(content: Html)
 
 <!DOCTYPE html>
 
@@ -34,16 +34,17 @@
 	<a href="javascript:void(0);" id="faq" class="iS arrowR">@Messages("main.help")</a>
 	</li>
 	<li class="fr pL15">
-	<a href="/CSP/my/myPage/" class="iS arrowR">@Messages("main.myPage")</a>
+	@* TODO check session, if user is not in login status, go to login page. *@
+	<a href="@routes.User.login" class="iS arrowR">@Messages("main.myPage")</a>
 	</li>
 	</ul>
 	<ul class="move cFix">
-	<li class="fl"><a href="@routes.Salons.index" class="cS salon">@Messages("main.hairSalon")</a></li>
-	<li class="fl"><a href="@routes.Styles.index" class="cS catalog">@Messages("main.hairCatalog")</a></li>
-	<li class="fl"><a href="@routes.Salons.index" class="cS nail">@Messages("main.nailSalon")</a></li>
-	<li class="fl"><a href="@routes.Styles.index" class="cS nailCatalog">@Messages("main.nailCatalog")</a></li>
-	<li class="fl"><a href="@routes.Salons.index" class="cS relax">@Messages("main.relaxSalon")</a></li>
-	<li class="fl"><a href="@routes.Salons.index" class="cS esthe">@Messages("main.estheSalon")</a></li>
+	<li class="fl"><a href="@routes.Salons.index" class="@if(nav == "hair-salon") {cS salonCurrent} @if(nav != "hair-salon") {cS salon}">@Messages("main.hairSalon")</a></li>
+	<li class="fl"><a href="@routes.Styles.index" class="@if(nav == "hair-catalog") {cS catalogCurrent} @if(nav != "hair-catalog") {cS catalog}">@Messages("main.hairCatalog")</a></li>
+	<li class="fl"><a href="@routes.Salons.index" class="@if(nav == "nail-salon") {cS nailCurrent} @if(nav != "nail-salon") {cS nail}">@Messages("main.nailSalon")</a></li>
+	<li class="fl"><a href="@routes.Styles.index" class="@if(nav == "nail-catalog") {cS nailCatalogCurrent} @if(nav != "nail-catalog") {cS nailCatalog}">@Messages("main.nailCatalog")</a></li>
+	<li class="fl"><a href="@routes.Salons.index" class="@if(nav == "relax-salon") {cS relaxCurrent} @if(nav != "relax-salon") {cS relax}">@Messages("main.relaxSalon")</a></li>
+	<li class="fl"><a href="@routes.Salons.index" class="@if(nav == "esthe-salon") {cS estheCurrent} @if(nav != "esthe-salon") {cS esthe}">@Messages("main.estheSalon")</a></li>
 	</ul>
 	</div>
 	</div>
