@@ -4,14 +4,14 @@
 
 # Home page
 GET     /                              controllers.Application.index
-GET     /login                         controllers.User.login
-POST    /tologin                       controllers.User.tologin
-GET     /loginSuccess                  controllers.User.loginSuccess
-GET     /register                      controllers.User.register
-GET     /toregister                    controllers.User.toregister
+GET     /login                         controllers.Users.login
+POST    /tologin                       controllers.Users.tologin
+GET     /loginSuccess                  controllers.Users.loginSuccess
+GET     /register                      controllers.Users.register
+GET     /toregister                    controllers.Users.toregister
 
 # Salons Management
-GET     /checkNameisexit/:name         controllers.User.checkNameisexit(name)
+GET     /checkNameisexit/:name         controllers.Users.checkNameisexit(name)
 
 
 # Stylists Management
@@ -55,8 +55,42 @@ GET		/findRecordByCondition		controllers.record.Records.findRecordByCondition
 #add reservation
 GET		/hairReservation			controllers.reservation.Reservations.hairReservation
 
+#----------------------------------------------------------------------------------------------
+#add MyPage by wu start
+GET     /myPageMain                         controllers.MyPages.myPageMain
+GET     /dianpu_guanzhu                         controllers.MyPages.dianpu_guanzhu
+GET     /stylist                         controllers.MyPages.stylist_guanzhu
 
 
+
+#add Comment
+GET     /addComment/:id                       controllers.Comments.addComment(id : ObjectId)
+GET     /comment/:commentedId                           controllers.Comments.find(commentedId : ObjectId)
+GET     /answer/:id/:commentedId                          controllers.Comments.answer(id : ObjectId, commentedId : ObjectId)
+GET     /huifu/:id/:commentedId                       controllers.Comments.huifu(id : ObjectId, commentedId : ObjectId)
+GET     /delete/:id/:commentedId                       controllers.Comments.delete(id : ObjectId, commentedId : ObjectId)
+GET     /complaint/:cmId                      controllers.Comments.complaint(cmId : ObjectId)
+
+POST     /addC/:commentedId                       controllers.Comments.addC(commentedId : ObjectId)
+
+
+# add Blog
+GET     /newBlog/:id                           controllers.Blogs.newBlog(id : ObjectId)
+
+GET     /deleteBlog/:id                         controllers.Blogs.deleteBlog(id : ObjectId)
+
+GET     /showBlog/:id                           controllers.Blogs.showBlog(id : ObjectId)
+
+POST     /writeBlog/:id                           controllers.Blogs.writeBlog(id : ObjectId)
+
+GET     /newBlogCatagory/:userId                          controllers.BlogCatagories.newBlogCatagory(userId : ObjectId)
+GET     /writeBlogCatagory/:userId                          controllers.BlogCatagories.writeBlogCatagory(userId : ObjectId)
+
+
+
+
+#add by wu end 
+#-------------------------------------------------------------------------------------------
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

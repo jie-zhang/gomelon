@@ -7,7 +7,7 @@
 		<h2>登录</h2>
 		<a href="#" id="nameLogin" >普通用户登录</a>
 		<a href="#" id="emailLogin">邮箱登录</a>
-		@form(routes.User.tologin){
+		@form(routes.Users.tologin){
 			<table>
 			<tr>
 				<td><label id="usernameinf">用户名</label></td>
@@ -23,7 +23,7 @@
 	        </tr>
 			<tr>
 				<td colspan="2"><input type="submit" class="submit" value="登录">
-					&nbsp;&nbsp;<a href="@routes.User.register">注册</a>
+					&nbsp;&nbsp;<a href="@routes.Users.register">注册</a>
 				</td>
 			</tr>
 		</table>
