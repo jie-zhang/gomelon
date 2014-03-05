@@ -29,10 +29,13 @@ object Styles extends Controller {
   
   
   def findBySalon(salonId: ObjectId) = Action {
-    
     val stylsOfSalon: Seq[Style] = Style.findBySalon(salonId)    
     Ok(html.style.overview(stylsOfSalon))
-    
+  }
+
+  def findBySalonAndId(salonId: ObjectId, styleId: ObjectId) = Action {
+    val styleOfSalon: Seq[Style] = Style.findBySalon(salonId, styleId)    
+    Ok(html.style.details(styleOfSalon))
   }
   
 
