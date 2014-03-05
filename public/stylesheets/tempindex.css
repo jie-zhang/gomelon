@@ -468,11 +468,11 @@ h1, h2 {
 	float: right;
 	width: 364px;
 	height: 31px;
-	padding: 8px 9px 0;
+	padding: 0;
 	background-position: 0 -260px;
 }
 .findBySalon		{ background-position: -400px -260px; width: 88px; height: 11px; }
-.inputSalonName 	{ width: 188px; font-size: 18px; line-height: 1; height: 19px; padding-top: 1px; *margin-top: -1px; }
+.inputSalonName 	{ width: 213px; font-size: 18px; line-height: 1; height: 20px; padding-top: 1px; *margin-top: -1px; }
 .searchButton		{ background-position: -300px -1280px; width:73px; height:24px; }
 .searchButton:hover	{ background-position: -300px -1304px; }
 
@@ -1726,7 +1726,8 @@ width: 568px;
 
 .searchBox input[type="text"] {
 	padding: 0 5px;
-	margin: 0;
+	margin: 2px 3px 0 0;
+	border: 0;
 }
 
 .searchBoxbg {
@@ -1752,3 +1753,12 @@ padding: 0px 15px;
 border: 1px solid #BFB4AB;
 }
 
+
+/* for rightColumn menu. */
+dl {
+display: block;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+}
