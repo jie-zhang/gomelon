@@ -1,6 +1,12 @@
 # ignore all dot files;
 .*
 
+# ignore all html temp files;
+*~
+
+# ignore all vim temp files;
+*.swp
+
 # except for .gitignore file;
 !.gitignore
 
