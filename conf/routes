@@ -41,9 +41,10 @@ GET         /salon/:id                      controllers.Salons.getSalon(id: Obje
 
 #
 # Style
-GET         /style                          controllers.Styles.index
-GET         /style/:id                      controllers.Styles.findById(id: ObjectId)
-GET         /salon/:salonId/styles          controllers.Styles.findBySalon(salonId: ObjectId)
+GET     /style                         controllers.Styles.index
+GET     /style/:id                     controllers.Styles.findById(id: ObjectId)
+GET     /salon/:salonId/styles         controllers.Styles.findBySalon(salonId: ObjectId)
+GET     /salon/:slnId/style/:styId     controllers.Styles.findBySalonAndId(slnId: ObjectId, styId: ObjectId)
 
 
 #
@@ -58,7 +59,15 @@ GET         /findRecordByCondition          controllers.record.Records.findRecor
 #add reservation
 GET         /hairReservation                controllers.reservation.Reservations.hairReservation
 
-
+#
+GET     /serviceMain                    controllers.Services.serviceMain
+GET     /addService                     controllers.Services.addService
+GET     /serviceTypeMain                    controllers.ServiceTypes.serviceTypeMain
+GET     /addServiceType                     controllers.ServiceTypes.addServiceType
+GET     /showAllServices                  controllers.Services.servicesList
+GET     /showAllServices/:id              controllers.Services.deleteService(id: ObjectId)
+GET     /showService                      controllers.Services.showService(id: ObjectId)
+GET     /showService/:id                  controllers.Services.updateService(id: ObjectId)
 
 
 # Map static resources from the /public folder to the /assets URL path
