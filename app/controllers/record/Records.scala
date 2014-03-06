@@ -10,10 +10,15 @@ import views._
 import se.radley.plugin.salat.Binders._
 import models._
 import com.mongodb.casbah.commons.MongoDBObject
+import java.util.Date
+import java.text.SimpleDateFormat
 
 
 object Records extends Controller{
-  val pageSize:Int = 5	 //每个页面有多少记录
+  val pageSize:Int = 5	 //每页显示记录
+  /**
+   * 定义一个履历表单
+   */
   val recordForm:Form[Record] = Form(
 	    mapping(
 	        "store" -> text,
@@ -36,11 +41,10 @@ object Records extends Controller{
 	)
   
 	/**
-	 * 分页查询，默认第一页
-	 * 当前设置的pageSize为5
+	 * 根据传过来的页数查找
 	 */
-	def recordmain(page:Int) = Action{implicit request =>
-	  val re = request.session.get("records").get
+	def findReserv(page:Int) = Action{implicit request =>
+	  val re = "spahome"
 	  val records = Record.findAllrecord(re,page,pageSize)
 	  val count = Record.counts(re)
 	  var pages:Int = 0
@@ -49,13 +53,14 @@ object Records extends Controller{
 	  }else{
 		pages = count.toInt/pageSize+1
 	  }
-	  Ok(views.html.record.recordmain(records,count,pages,page))
+	  Ok(views.html.storeReservation.findReserv(records,count,pages,page))
 	}
+  
   	/**
-  	 * 条件检索查询
+  	 * 根据组合条件搜索查找
   	 */
   	def findRecordByCondition = Action {implicit request =>
-  	  val re = request.session.get("records").get
+  	  val re = "spahome"
   	  val designer = request.getQueryString("serviceDesigner")
   	  val serviceStart = request.getQueryString("serviceStart")
   	  val serviceStatus = request.getQueryString("serviceStatus")
@@ -86,59 +91,48 @@ object Records extends Controller{
 		pages = count.toInt/pageSize+1
 	  }
   	  
-  	   Ok(views.html.record.recordmain(records,count,pages,1))
+  	   Ok(views.html.storeReservation.findReserv(records,count,pages,1))
   	}
   	  	  
-  	  	    
-  	  		
+  	 /**
+  	  *       店铺查看技师日程
+  	  */ 	    
+  	 def checkStylistReserv = Action {
+	   
+	  var date:Date = new SimpleDateFormat("yyyy-MM-dd HH:mm").parse("2005-06-09 06:30")
+	  var list:List[java.util.Date]=Nil
+	  val from = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+	  for(i<-1 to 25){
+	    date.setMinutes(date.getMinutes() - 30)
+	    println("date......."+from.format(date))
+	    list:::=List(new Date(date.toString())) //error
+	  }
+	  Ok(views.html.storeReservation.checkStylistReserv(list.reverse))
+	} 		
 	      
 	    
   	
   	/**
-  	 * 预约记录详细查看
+  	 * 对某一条记录做详细查看
   	 */
-	def recordview(id:ObjectId) = Action{
+	def checkReservInfo(id:ObjectId) = Action{
 	  Record.findOneById(id).map { record =>
-	  	Ok(views.html.record.recordview(record))
+	  	Ok(views.html.storeReservation.checkReservInfo(record))
 	  }getOrElse {
 		  NotFound
     }
 	  
 	}
+	
 	/**
-	 * 进入页面，自己录入一个预约记录
+	 * 店铺查看履历跳至技师页面
 	 */
-	def createrecord = Action{
-	  Ok(views.html.record.createrecord(recordForm))
-	}
-	/**
-	 * 将录入预约记录插入数据库中
-	 */
-	def toCreateRecords = Action{implicit request =>
-	  recordForm.bindFromRequest.fold(
-	    error =>BadRequest(views.html.errorMsg(error)),
-	    {
-	      case(record)=>
-	        println("println....record  "+record.store+record.serviceStatus+record.serviceStart+record.serviceEnd+record.costTotal)
-	       Record.createRecord(record)
-	       Redirect(controllers.record.routes.Records.recordmain(1))
-	    }
-	)
-	}
-	/**
-	 * 添加预约，暂时用不到，功能流程需要更换
-	 */
-	def addRecord = Action {
-	    Ok(views.html.record.addRecord(""))
-	  } 
-	/**
-	 * 指定技师查看日程
-	 */
-	def selectDesignerRecord = Action {
-	  Ok(views.html.record.selectDesignerRecord(""))
+	def selectStylistReserv = Action {
+	  Ok(views.html.storeReservation.selectStylistReserv(""))
 	}
 	
 	/**
+	 *
 	 *变更预约状态
 	 * -1：已取消
 	 * 0：已预约
@@ -147,8 +141,9 @@ object Records extends Controller{
 	 *   
 	 */
 	
+	
 	/**
-	 * 取消预约将状态改成-1
+	 *取消预约将状态改成-1
 	 */
 	def cancelRecord(id: ObjectId) = Action {
 		Record.findOneById(id).map { record =>
@@ -157,9 +152,9 @@ object Records extends Controller{
 		Record.save(records.copy(id = record.id))
 		
 		}
-		Redirect(controllers.record.routes.Records.recordmain(1))
+		Redirect(controllers.record.routes.Records.findReserv(1))
 	}
-	//将状态改成预约中0
+	//
 	/*def inRecord(id: ObjectId) = Action {
 		Record.findOneById(id).map { record =>
 		val records = new Record(new ObjectId,record.store,0,record.serviceStart,record.serviceEnd,
@@ -167,7 +162,7 @@ object Records extends Controller{
 		Record.save(records.copy(id = record.id))
 		
 		}
-		Redirect(controllers.record.routes.Records.recordmain)
+		Redirect(controllers.record.routes.Records.findReserv)
 	}*/
 	/**
 	 * 将预约状态改成已完成消费1
@@ -179,7 +174,7 @@ object Records extends Controller{
 		Record.save(records.copy(id = record.id))
 		
 		}
-		Redirect(controllers.record.routes.Records.recordmain(1))
+		Redirect(controllers.record.routes.Records.findReserv(1))
 	}
 	/**
 	 * 将预约状态改成已过期2
@@ -191,7 +186,7 @@ object Records extends Controller{
 		Record.save(records.copy(id = record.id))
 		
 		}
-		Redirect(controllers.record.routes.Records.recordmain(1))
+		Redirect(controllers.record.routes.Records.findReserv(1))
 	}
 	
 	
