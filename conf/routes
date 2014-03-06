@@ -3,72 +3,69 @@
 # ~~~~
 
 # Home page
-GET         /                               controllers.Application.index
-GET         /login                          controllers.Application.login()
-GET         /register                       controllers.Application.register()
+GET     /                               controllers.Application.index
 
 # User Management
-POST        /login                          controllers.user.Users.login
-POST        /register                       controllers.user.Users.register
-POST        /update/:id                     controllers.user.Users.update(id: ObjectId)
-GET         /show/:userId                   controllers.user.Users.show(userId)
-GET         /myPage/:userId                 controllers.user.Users.myPage(userId)
-
-# Salons Management
-
-
-# Stylists Management
-GET         /designermain                   controllers.designer.Designer.designermain
-GET         /designersearch                 controllers.designer.Designer.designersearch
-GET         /designerview                   controllers.designer.Designer.designerview
-GET         /designerTask                   controllers.designer.Designer.designerTask
-
-# Reservations Management
-GET         /recordmain/:page               controllers.record.Records.recordmain(page:Int)
-GET         /recordview/:id                 controllers.record.Records.recordview(id: ObjectId)
-GET         /createrecord                   controllers.record.Records.createrecord
-POST        /toCreateRecords                controllers.record.Records.toCreateRecords
-GET         /addRecord                      controllers.record.Records.addRecord
-GET         /selectDesignerRecord           controllers.record.Records.selectDesignerRecord
-GET         /cancelRecord/:id               controllers.record.Records.cancelRecord(id: ObjectId)
-GET         /overdateRecord/:id             controllers.record.Records.overdateRecord(id: ObjectId)
-GET         /finishRecord/:id               controllers.record.Records.finishRecord(id: ObjectId)
+GET     /login                          controllers.Application.login()
+GET     /register                       controllers.Application.register()
+POST    /login                          controllers.Users.login
+POST    /register                       controllers.Users.register
+POST    /update/:id                     controllers.Users.update(id: ObjectId)
+GET     /show/:userId                   controllers.Users.show(userId)
+GET     /myPage/:userId                 controllers.Users.myPage(userId)
 
 
 # Salon 
-GET         /salon                          controllers.Salons.index
-GET         /salon/:id                      controllers.Salons.getSalon(id: ObjectId)
+GET     /salon                          controllers.Salons.index
+GET     /salon/:id                      controllers.Salons.getSalon(id: ObjectId)
 
-#
+
 # Style
-GET     /style                         controllers.Styles.index
-GET     /style/:id                     controllers.Styles.findById(id: ObjectId)
-GET     /salon/:salonId/styles         controllers.Styles.findBySalon(salonId: ObjectId)
-GET     /salon/:slnId/style/:styId     controllers.Styles.findBySalonAndId(slnId: ObjectId, styId: ObjectId)
+GET     /style                          controllers.Styles.index
+GET     /style/:id                      controllers.Styles.findById(id: ObjectId)
+GET     /salon/:salonId/styles          controllers.Styles.findBySalon(salonId: ObjectId)
+GET     /salon/:slnId/style/:styId      controllers.Styles.findBySalonAndId(slnId: ObjectId, styId: ObjectId)
 
 
-#
 # Stylist
-GET         /stylist/:id                    controllers.Stylists.findById(id: ObjectId)
-GET         /salon/:salonId/Stylists        controllers.Stylists.findBySalon(salonId: ObjectId)
+GET     /stylist/:id                    controllers.Stylists.findById(id: ObjectId)
+GET     /salon/:salonId/Stylists        controllers.Stylists.findBySalon(salonId: ObjectId)
+GET     /findStylist                    controllers.Stylists.findStylist
+GET     /checkStylist                   controllers.Stylists.checkStylist
 
 
-
-GET         /findRecordByCondition          controllers.record.Records.findRecordByCondition
+# Reservations Management
+GET     /findReserv/:page               controllers.Records.findReserv(page:Int) 
+GET     /cancelRecord/:id               controllers.Records.cancelRecord(id: ObjectId)
+GET     /checkReservInfo/:id            controllers.Records.checkReservInfo(id: ObjectId)
+GET     /selectStylistReserv            controllers.Records.selectStylistReserv
+GET     /overdateRecord/:id             controllers.Records.overdateRecord(id: ObjectId)
+GET     /finishRecord/:id               controllers.Records.finishRecord(id: ObjectId)
+GET     /findRecordByCondition          controllers.Records.findRecordByCondition
 
 #add reservation
-GET         /hairReservation                controllers.reservation.Reservations.hairReservation
+GET     /reservHairView                 controllers.Reservations.reservHairView
+GET     /reservSelectDate               controllers.Reservations.reservSelectDate
+GET     /reservSelectStylist            controllers.Reservations.reservSelectStylist
+POST    /reservConfirmPwd               controllers.Reservations.reservConfirmPwd
+GET     /reservFinish                   controllers.Reservations.reservFinish
+GET     /reservConfirmInfo              controllers.Reservations.reservConfirmInfo
 
-#
-GET     /serviceMain                    controllers.Services.serviceMain
-GET     /addService                     controllers.Services.addService
-GET     /serviceTypeMain                    controllers.ServiceTypes.serviceTypeMain
-GET     /addServiceType                     controllers.ServiceTypes.addServiceType
-GET     /showAllServices                  controllers.Services.servicesList
-GET     /showAllServices/:id              controllers.Services.deleteService(id: ObjectId)
-GET     /showService                      controllers.Services.showService(id: ObjectId)
-GET     /showService/:id                  controllers.Services.updateService(id: ObjectId)
+
+# Salon Service 
+GET     /addServiceType                  controllers.ServiceTypes.addServiceType
+GET     /serviceTypeMain                 controllers.ServiceTypes.serviceTypeMain
+GET     /serviceMain                     controllers.Services.serviceMain
+GET     /showAllServices                 controllers.Services.servicesList
+GET     /addService                      controllers.Services.addService
+GET     /showAllServices/:id             controllers.Services.deleteService(id: ObjectId)
+GET     /showService                     controllers.Services.showService(id: ObjectId)
+GET     /showService/:id                 controllers.Services.updateService(id: ObjectId)
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file                   controllers.Assets.at(path="/public", file)
+GET     /assets/*file                    controllers.Assets.at(path="/public", file)
+
+
+
+

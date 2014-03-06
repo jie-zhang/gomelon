@@ -1,4 +1,4 @@
-package controllers.user
+package controllers
 
 import play.api.mvc._
 import java.util.Date
@@ -6,8 +6,8 @@ import com.mongodb.casbah.WriteConcern
 import se.radley.plugin.salat.Binders._
 import play.api.data.Form
 import play.api.data.Forms._
-import models.User
-import controllers.routes
+import models._
+
 
 object Users extends Controller {
   def registerForm(id :ObjectId = new ObjectId) = Form(

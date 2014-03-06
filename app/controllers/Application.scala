@@ -1,7 +1,6 @@
 package controllers
 
 import play.api.mvc._
-import controllers.user.Users
 
 object Application extends Controller {
 	def index = Action {
