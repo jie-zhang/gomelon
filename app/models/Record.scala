@@ -2,7 +2,6 @@ package models
 
 import play.api.Play.current
 import java.util.Date
-import util.MongodbColl
 import com.novus.salat._
 import com.novus.salat.annotations._
 import com.novus.salat.dao._
