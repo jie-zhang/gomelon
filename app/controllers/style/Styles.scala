@@ -27,7 +27,6 @@ object Styles extends Controller {
     Ok(html.style.overview(style))
   }
   
-  
   def findBySalon(salonId: ObjectId) = Action {
     val stylsOfSalon: Seq[Style] = Style.findBySalon(salonId)    
     Ok(html.style.overview(stylsOfSalon))
@@ -36,7 +35,7 @@ object Styles extends Controller {
   def findBySalonAndId(salonId: ObjectId, styleId: ObjectId) = Action {
     val styleOfSalon: Seq[Style] = Style.findBySalon(salonId, styleId)    
     Ok(html.style.details(styleOfSalon))
-  }
+ }
   
 
 
