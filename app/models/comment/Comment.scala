@@ -27,12 +27,12 @@ case class Comment(
 object Comment extends ModelCompanion[Comment, ObjectId] {
   val dao = new SalatDAO[Comment, ObjectId](collection = mongoCollection("comment")) {}
   
-//  var list : List[Comments] = Nil
   implicit var list = List.empty[Comment]
   def all(id : ObjectId): List[Comment] =   
     {
-//    val i = Comments.list.distinct
-     val l = dao.find(MongoDBObject("commentedId" -> id, "status" -> 0)).toList
+//     val l = dao.find(MongoDBObject("commentedId" -> id, "status" -> 0)).toList
+    //以时间降序排序
+    val l = dao.find(MongoDBObject("commentedId" -> id, "status" -> 0)).sort(MongoDBObject("time" -> -1)).toList
      if (!l.isEmpty){
      l.foreach(
        {
@@ -40,16 +40,9 @@ object Comment extends ModelCompanion[Comment, ObjectId] {
            all(r.id)
        })
      }
-     list
-//     i
-     
-    
+    // 把店家的回复放在下面
+     list.reverse
     }
-  
-  
-//  def addComment(cmUsername : String, cmTime : String, cmContent : String, cmService : String, cmAddContent : String) {
-//    dao.insert(Comment_m(cmUsername = cmUsername,cmTime = cmTime,cmContent = cmContent,cmService = cmService, cmAddContent = cmAddContent))
-//  }
   
   def addComment(userId : ObjectId, content : String, commentedId : ObjectId, relevantUser : ObjectId) = {
     dao.save(Comment(userId = userId, status = 0, commentedId = commentedId, relevantUser = relevantUser, commentedType = 1, content = content))    

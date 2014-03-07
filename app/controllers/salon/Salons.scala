@@ -14,7 +14,8 @@ object Salons extends Controller {
 
   def index = Action {
     val salons: Seq[Salon] = Salon.findAll()
-    Ok(views.html.salon.overview(salons))
+//    Ok(views.html.salon.overview(salons))
+      Ok(views.html.salon.index(""))
   }
 
   

@@ -27,9 +27,43 @@ object BlogCatagories extends Controller {
         //处理错误
         errors => BadRequest(views.html.blog.newBlogCatagory(userId, errors)),
         {
-          case (catagory) =>         
+          case (catagory) =>   
+            BlogCatagory.list = Nil
 	        BlogCatagory.newBlogCatagory(userId, catagory)
 	        Ok("创建成功！")
+        }
+                
+          
+            
+        )
+    }
+    
+    def editBlogCatagory(userId : ObjectId) = Action {
+      val listBlogCatagory = BlogCatagory.findBlogCatagory(userId)
+      val catarory = listBlogCatagory(0).catagory
+      Ok(views.html.blog.editBlogCatagory(userId, catarory))
+    }
+    
+    def delBlogCatarory(userId : ObjectId, blogCatagory : String) = Action {
+      BlogCatagory.delBlogCatagory(userId, blogCatagory)
+      val listBlogCatagory = BlogCatagory.findBlogCatagory(userId)
+      val catarory = listBlogCatagory(0).catagory
+      Ok(views.html.blog.editBlogCatagory(userId, catarory))
+    }
+    
+    def modBlogCatarory(userId : ObjectId, blogCatagory : String) = Action {
+      Ok(views.html.blog.modBlogCatagory(formBlogCatagory, blogCatagory, userId))
+    }
+    
+    def modCatagory(userId : ObjectId, blogCatagory : String) = Action {
+            implicit request =>
+      formBlogCatagory.bindFromRequest.fold(
+        //处理错误
+        errors => BadRequest(views.html.blog.modBlogCatagory(errors, blogCatagory, userId)),
+        {
+          case (catagory) =>        
+	        BlogCatagory.modCatagory(userId, blogCatagory, catagory)
+	        Redirect(routes.BlogCatagories.editBlogCatagory(userId))
         }
                 
           

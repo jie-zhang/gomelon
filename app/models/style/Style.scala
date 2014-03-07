@@ -46,6 +46,10 @@ object Style {
         StyleDAO.find(DBObject("salonId" -> salonId)).toList
     }
 
+    def findBySalon(salonId: ObjectId, styleId: ObjectId): List[Style] = {
+        StyleDAO.find(DBObject("salonId" -> salonId, "_id" -> styleId)).toList
+    }
+
     def create(style: Style): Option[ObjectId] = {
         StyleDAO.insert(
             Style(
@@ -56,7 +60,18 @@ object Style {
         )
     }
 
-    def delete(id: String) {
+    def save(style: Style) = {
+        StyleDAO.save(
+            Style(
+		id = style.id,
+                label = style.label,
+                salonId = style.salonId,
+                stylistId = style.stylistId
+            )
+        )
+    }
+
+   def delete(id: String) {
         StyleDAO.remove(MongoDBObject("_id" -> new ObjectId(id)))
     }
 

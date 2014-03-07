@@ -1,4 +1,4 @@
-@(userId : ObjectId, formBlog: Form[(String,String,String,String)])
+@(userId : ObjectId, formBlog: Form[(String,String,String,String)], list : List[String])
 
     @import helper._
 
@@ -9,12 +9,8 @@
 			@textarea(formBlog("content"),'_label -> "内容")
 			@select(
             field = formBlog("blogTyp"), 
-            options = options(
-                "心情" -> "心情",
-                "杂文" -> "杂文",
-                "吐槽" -> "吐槽"
-            ),
-            args = '_label -> "博客类型"
+            options = options(list),
+            '_label -> "博客类型"
             )	
             
             <a href = "@routes.BlogCatagories.newBlogCatagory(userId)">创建一个新的分类</a>	

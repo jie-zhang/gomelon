@@ -43,9 +43,11 @@ object Blogs extends Controller {
 //
 //  }
   
-  def newBlog(id : ObjectId) = Action {
-    
-    Ok(views.html.blog.blog(id, formBlog))
+  def newBlog(userId : ObjectId) = Action {
+    // list是一个blog分类的list
+//    val list = Blog.getCatagories(userId)
+    val list = BlogCatagory.getCatagory(userId)
+    Ok(views.html.blog.blog(userId, formBlog, list))
   }
   
   def deleteBlog(id : ObjectId) = Action {
@@ -54,6 +56,17 @@ object Blogs extends Controller {
       val userId = new ObjectId(user_id)
     Blog.delete(id)
     Redirect(routes.Blogs.showBlog(userId))
+  }
+  
+  def test = Action {
+    val userId = new ObjectId("5315b707a89edbf29369926c")
+    val list = Blog.findByUserId(userId)
+    // 目前传递的是username，可能需要传真实姓名或者是昵称，待完善
+    val name = User.getUsername(userId)
+//    println("---------"+list(0).createdTime.toLocaleString.formatted("YY/MM/DD"))
+//    println("---------"+list(0).createdTime.toLocaleString())
+    // 这边时间的format需要调整，目前的格式是2014/03/05 9:04:08，，，，可能需要调整
+    Ok(views.html.blog.blogTest(name, list))
   }
   
 //  def test = Action  {
@@ -67,16 +80,29 @@ object Blogs extends Controller {
 //
 //  }
   
+  /**
+   * 这个参数是userid的意思 showBlogByUserId
+   */
   def showBlog(id : ObjectId) = Action {
     val list = Blog.showBlog(id)
     Ok(views.html.blog.findBlogs(id, list))
   }
   
+  /**
+   * 通过blog的id找到blog
+   */
+  def showBlogById(id : ObjectId) = Action {
+    val list = Blog.showBlogById(id)
+    Ok(views.html.blog.findBlogs(id, list))
+  }
+  
   def writeBlog(id : ObjectId) = Action {
+    
       implicit request =>
       formBlog.bindFromRequest.fold(
         //处理错误
-        errors => BadRequest(views.html.blog.blog(id, errors)),
+//          val list = BlogCatagory.getcatagory(id)
+        errors => BadRequest(views.html.blog.blog(id, errors, BlogCatagory.getCatagory(id))),
         {
           case (title,content,blogTyp,tags) =>
 //            val userId = new ObjectId(user_id) // 这边需要用session取得用户名之类的东西

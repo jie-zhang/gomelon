@@ -28,9 +28,50 @@ object BlogCatagory extends ModelCompanion[BlogCatagory, ObjectId] {
   def newBlogCatagory(userId : ObjectId, catagory : String) = {
     
 //    catagory :: list
+    list = getCatagory(userId)
     list :::= List(catagory)
-    dao.save(BlogCatagory(userId = userId, status = 0, catagory = list))    
+//    println("----------" + getIdByUserId(userId))
+//    
+////    println("++++++" + new ObjectId(getIdByUserId(userId).toString))
+    if (getIdByUserId(userId).equals(None)){
+      dao.save(BlogCatagory(userId = userId, status = 0, catagory = list)) 
+    }else{
+      dao.save(BlogCatagory(id = new ObjectId(getIdByUserId(userId).toString), userId = userId, status = 0, catagory = list.removeDuplicates)) 
+    }
+
   }
+  
+  def getIdByUserId(userId : ObjectId) = {
+    val id = dao.find(MongoDBObject("userId" -> userId))
+    if(id.hasNext){
+       id.next.id
+    }else
+      None     
+  }
+  
+  def getCatagory(userId : ObjectId) : List[String] = {
+    val catagory = dao.find(MongoDBObject("userId" -> userId))
+     if(catagory.hasNext){
+       catagory.next.catagory
+    }else
+      Nil 
+  }
+  
+  def findBlogCatagory(userId : ObjectId) = {
+    dao.find(MongoDBObject("userId" -> userId)).toList
+  }
+  
+  def delBlogCatagory(userId : ObjectId, blogCatagory : String) = {
+	val listCatagory = getCatagory(userId)
+	val newLisrCatagory = listCatagory.diff(List(blogCatagory))
+	dao.save(BlogCatagory(id = new ObjectId(getIdByUserId(userId).toString), userId = userId, status = 0, catagory = newLisrCatagory))
+  }
+  
+  def modCatagory(userId : ObjectId, blogCatagory : String, catagory : String) = {
+    delBlogCatagory(userId, blogCatagory)
+    newBlogCatagory(userId, catagory)
+  }
+  
 //  
 //  def showBlog(userId : ObjectId) = {
 //    val blog = dao.find(MongoDBObject("userId" -> userId, "status" -> 0)).toList

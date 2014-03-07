@@ -12,7 +12,7 @@ import com.mongodb.casbah.Imports.ObjectId
 
 object Comments extends Controller {
   
-  var nowTime = new Date()
+//  var nowTime = new Date()
 //  println(time)
   
 //  val formFindComment = Form(tuple(
@@ -62,6 +62,13 @@ object Comments extends Controller {
   
   def addComment(commentedId : ObjectId) = Action {
     Ok(views.html.comment.addComment(commentedId, formAddComment))
+  }
+  
+  def test = Action {
+    val commentedId = new ObjectId("53167d81a89e21dea32868dd")
+    clean() 
+    val list = Comment.all(commentedId)
+    Ok(views.html.comment.commentTest(list))
   }
   
   def addC(commentedId : ObjectId) = Action {
