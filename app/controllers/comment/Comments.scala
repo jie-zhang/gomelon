@@ -12,38 +12,16 @@ import com.mongodb.casbah.Imports.ObjectId
 
 object Comments extends Controller {
   
-//  var nowTime = new Date()
-//  println(time)
-  
-//  val formFindComment = Form(tuple(
-//    "cmUsername" -> nonEmptyText,   
-//    "cmTime" -> ignored(nowTime),
-//    "cmContent" -> nonEmptyText,
-//    "cmService" -> nonEmptyText,
-//    "cmAddContent" -> text
-//  ))
-  
+
   val formAddComment = Form((
-//    "cmUsername" -> nonEmptyText,   
-//    "cmTime" -> ignored(time),
     "content" -> nonEmptyText
-//    "cmService" -> nonEmptyText,
-//    "cmAddContent" -> text
   ))
   
   val formHuifuComment = Form((
-//    "cmUsername" -> nonEmptyText,   
-//    "cmTime" -> ignored(time),
-//    "cmContent" -> nonEmptyText,
-//    "cmService" -> nonEmptyText,
     "content" -> text
-//    "cmAddUsername" -> text
   ))
   
-//  val formFindCommnet = Form(tuple(
-//    "username" -> nonEmptyText,   
-//    "password" -> nonEmptyText
-//  ))
+
   
   def find(commentedId : ObjectId) = Action {
     
@@ -64,6 +42,7 @@ object Comments extends Controller {
     Ok(views.html.comment.addComment(commentedId, formAddComment))
   }
   
+  // 这是数据库中的被评论对象的ObjectId的编号
   def test = Action {
     val commentedId = new ObjectId("53167d81a89e21dea32868dd")
     clean() 

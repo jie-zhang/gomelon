@@ -1,0 +1,67 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                               controllers.Application.index
+
+# User Management
+GET     /login                          controllers.Application.login()
+GET     /register                       controllers.Application.register()
+POST    /login                          controllers.Users.login
+POST    /register                       controllers.Users.register
+POST    /update/:id                     controllers.Users.update(id: ObjectId)
+GET     /show/:userId                   controllers.Users.show(userId)
+GET     /myPage/:userId                 controllers.Users.myPage(userId)
+
+
+# Salon 
+GET     /salon                          controllers.Salons.index
+GET     /salon/:id                      controllers.Salons.getSalon(id: ObjectId)
+
+
+# Style
+GET     /style                          controllers.Styles.index
+GET     /style/:id                      controllers.Styles.findById(id: ObjectId)
+GET     /salon/:salonId/styles          controllers.Styles.findBySalon(salonId: ObjectId)
+GET     /salon/:slnId/style/:styId      controllers.Styles.findBySalonAndId(slnId: ObjectId, styId: ObjectId)
+
+
+# Stylist
+GET     /stylist/:id                    controllers.Stylists.findById(id: ObjectId)
+GET     /salon/:salonId/Stylists        controllers.Stylists.findBySalon(salonId: ObjectId)
+GET     /findStylist                    controllers.Stylists.findStylist
+GET     /checkStylist                   controllers.Stylists.checkStylist
+
+
+# Reservations Management
+GET     /findReserv/:page               controllers.Records.findReserv(page:Int) 
+GET     /cancelRecord/:id               controllers.Records.cancelRecord(id: ObjectId)
+GET     /checkReservInfo/:id            controllers.Records.checkReservInfo(id: ObjectId)
+GET     /selectStylistReserv            controllers.Records.selectStylistReserv
+GET     /overdateRecord/:id             controllers.Records.overdateRecord(id: ObjectId)
+GET     /finishRecord/:id               controllers.Records.finishRecord(id: ObjectId)
+GET     /findRecordByCondition          controllers.Records.findRecordByCondition
+
+#add reservation
+GET     /reservHairView                 controllers.Reservations.reservHairView
+GET     /reservSelectDate               controllers.Reservations.reservSelectDate
+GET     /reservSelectStylist            controllers.Reservations.reservSelectStylist
+POST    /reservConfirmPwd               controllers.Reservations.reservConfirmPwd
+GET     /reservFinish                   controllers.Reservations.reservFinish
+GET     /reservConfirmInfo              controllers.Reservations.reservConfirmInfo
+
+
+# Salon Service 
+GET     /addServiceType                  controllers.ServiceTypes.addServiceType
+GET     /serviceTypeMain                 controllers.ServiceTypes.serviceTypeMain
+GET     /serviceMain                     controllers.Services.serviceMain
+GET     /showAllServices                 controllers.Services.servicesList
+GET     /addService                      controllers.Services.addService
+GET     /showAllServices/:id             controllers.Services.deleteService(id: ObjectId)
+GET     /showService                     controllers.Services.showService(id: ObjectId)
+GET     /showService/:id                 controllers.Services.updateService(id: ObjectId)
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                    controllers.Assets.at(path="/public", file)
