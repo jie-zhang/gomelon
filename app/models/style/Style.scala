@@ -47,7 +47,7 @@ object Style {
     }
 
     def findBySalon(salonId: ObjectId, styleId: ObjectId): Option[Style] = {
-        StyleDAO.find(DBObject("salonId" -> salonId, "_id" -> styleId))
+        StyleDAO.findOne(DBObject("salonId" -> salonId, "_id" -> styleId))
     }
 
     def create(style: Style): Option[ObjectId] = {
