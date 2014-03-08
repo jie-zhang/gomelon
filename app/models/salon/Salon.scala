@@ -36,8 +36,8 @@ object Salon {
         SalonDAO.find(MongoDBObject.empty).toList
     }
 
-    def findById(id: ObjectId): List[Salon] = {
-        SalonDAO.find(MongoDBObject("_id" -> id)).toList
+    def findById(id: ObjectId): Option[Salon] = {
+        SalonDAO.findOne(MongoDBObject("_id" -> id))
     }
 
     def create(salon: Salon): Option[ObjectId] = {

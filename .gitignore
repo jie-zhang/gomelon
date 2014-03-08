@@ -23,3 +23,6 @@ test-result
 tmp
 dist
 *.iml
+
+# individual work plan not to commit.
+doc/plan

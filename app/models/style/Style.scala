@@ -38,16 +38,16 @@ object Style {
         StyleDAO.find(MongoDBObject.empty).toList
     }
 
-    def findById(id: ObjectId): List[Style] = {
-        StyleDAO.findOne(MongoDBObject("_id" -> id)).toList
+    def findById(id: ObjectId): Option[Style] = {
+        StyleDAO.findOne(MongoDBObject("_id" -> id))
     }
 
     def findBySalon(salonId: ObjectId): List[Style] = {
         StyleDAO.find(DBObject("salonId" -> salonId)).toList
     }
 
-    def findBySalon(salonId: ObjectId, styleId: ObjectId): List[Style] = {
-        StyleDAO.find(DBObject("salonId" -> salonId, "_id" -> styleId)).toList
+    def findBySalon(salonId: ObjectId, styleId: ObjectId): Option[Style] = {
+        StyleDAO.find(DBObject("salonId" -> salonId, "_id" -> styleId))
     }
 
     def create(style: Style): Option[ObjectId] = {

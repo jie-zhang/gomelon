@@ -69,7 +69,7 @@ object Services extends Controller {
   
   def updateService(id: ObjectId) = Action { implicit request =>
     serviceShowForm().bindFromRequest.fold(
-      errors => BadRequest(views.html.service.errorMsg(errors)),
+      errors => BadRequest(views.html.error.errorMsg(errors)),
       {
         service =>
           Service.save(service.copy(id = id), WriteConcern.Safe)

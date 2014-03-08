@@ -15,12 +15,12 @@ object Salons extends Controller {
   def index = Action {
     val salons: Seq[Salon] = Salon.findAll()
 //    Ok(views.html.salon.overview(salons))
-      Ok(views.html.salon.index(""))
+      Ok(views.html.salon.general.index(""))
   }
 
   
   def getSalon(salonId: ObjectId) = Action {
-    val salon: Seq[Salon] = Salon.findById(salonId)
+    val salon: Seq[Salon] = Salon.findById(salonId).toList
     Ok(views.html.salon.overview(salon))
   }
 

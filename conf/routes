@@ -24,7 +24,7 @@ GET     /salon/:id                      controllers.Salons.getSalon(id: ObjectId
 GET     /style                          controllers.Styles.index
 GET     /style/:id                      controllers.Styles.findById(id: ObjectId)
 GET     /salon/:salonId/styles          controllers.Styles.findBySalon(salonId: ObjectId)
-GET     /salon/:slnId/style/:styId      controllers.Styles.findBySalonAndId(slnId: ObjectId, styId: ObjectId)
+GET     /salon/:slnId/style/:styId      controllers.Styles.getStyleInfoOfSalon(slnId: ObjectId, styId: ObjectId)
 
 
 # Stylist
