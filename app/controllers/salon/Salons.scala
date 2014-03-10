@@ -20,8 +20,13 @@ object Salons extends Controller {
 
   
   def getSalon(salonId: ObjectId) = Action {
-    val salon: Seq[Salon] = Salon.findById(salonId).toList
-    Ok(views.html.salon.overview(salon))
+    val salon: Option[Salon] = Salon.findById(salonId)
+
+    // TODO
+    // Option when null
+    // enum for nav.
+    val nav: String = "salon-basic"
+    Ok(views.html.salon.store.homepage(navInSalon = nav, salon = salon.get))
   }
 
 

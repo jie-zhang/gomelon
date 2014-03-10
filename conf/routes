@@ -29,7 +29,7 @@ GET     /salon/:slnId/style/:styId      controllers.Styles.getStyleInfoOfSalon(s
 
 # Stylist
 GET     /stylist/:id                    controllers.Stylists.findById(id: ObjectId)
-GET     /salon/:salonId/Stylists        controllers.Stylists.findBySalon(salonId: ObjectId)
+GET     /salon/:salonId/stylists        controllers.Stylists.findBySalon(salonId: ObjectId)
 GET     /findStylist                    controllers.Stylists.findStylist
 GET     /checkStylist                   controllers.Stylists.checkStylist
 
