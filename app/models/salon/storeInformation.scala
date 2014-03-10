@@ -16,23 +16,23 @@ import play.api.data.Forms._
 
 
 case class BasicInformation(
-				 id: ObjectId = new ObjectId,	
-                 storeId: String,
-                 storeNm: String,
-                 storeTyp: String,
-                 homePage: String,
-                 establishDate: Date,
-                 addProvince: String,
-                 addCity: String,
-                 addArea: String,
-                 addTown: String,
-                 add: String,
-                 email: String,
-                 registerTime: Date,
-                 image: String,
-                 qq: Int,
-                 North: Int,
-                 West: Int
+				id: ObjectId = new ObjectId,
+				storeId: String,
+				storeNm: String,
+				storeTyp: String,
+				homePage: String,
+				establishDate: Date,
+				addProvince: String,
+				addCity: String,
+				addArea: String,
+				addTown: String,
+				add: String,
+				email: String,
+				registerTime: Date,
+				image: String,
+				qq: Int,
+				North: Int,
+				West: Int
                  )
  
 case class DetailedInformation(
