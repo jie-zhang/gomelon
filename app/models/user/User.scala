@@ -9,7 +9,7 @@ import se.radley.plugin.salat.Binders._
 import mongoContext._
 
 case class User(
-	 id: ObjectId = new ObjectId,	
+     id: ObjectId = new ObjectId,    
          userId: String,
          password: String,
          nickNm: String,
@@ -32,27 +32,30 @@ case class User(
 object User extends UserDAO
 
 trait UserDAO extends ModelCompanion[User, ObjectId] {
-  def collection = mongoCollection("users")
-  val dao = new SalatDAO[User, ObjectId](collection) {}
+      def collection = mongoCollection("users")
+      val dao = new SalatDAO[User, ObjectId](collection) {}
 
-  // Indexes
-  collection.ensureIndex(DBObject("userId" -> 1), "userId", unique = true)
+      // Indexes
+      collection.ensureIndex(DBObject("userId" -> 1), "userId", unique = true)
 
-  // Queries
-  def findOneByUserId(userId: String): Option[User] = dao.findOne(MongoDBObject("userId" -> userId))
-  def findByNickNm(nickNm: String) = dao.find(MongoDBObject("nickNm" -> nickNm))
-  def findByEmail(email: String) = dao.find(MongoDBObject("email" -> email))
-  def authenticate(userId: String, password: String): Option[User] = findOne(MongoDBObject("userId" -> userId, "password" -> password))
-  
-  def getUsername(id : Object) = 
-    {
-    val p = dao.find(MongoDBObject("_id" -> id))
-    val username = p.next.userId
-    username
-    }
-  def findId(name : String) = {	  
-  	  val p = dao.find(MongoDBObject("userId" -> name))
-  	  val id = p.next.id
-	  id	  
-  }
-  }
+      // Queries
+      def findOneByUserId(userId: String): Option[User] = dao.findOne(MongoDBObject("userId" -> userId))
+      def findByNickNm(nickNm: String) = dao.find(MongoDBObject("nickNm" -> nickNm))
+      def findByEmail(email: String) = dao.find(MongoDBObject("email" -> email))
+      def authenticate(userId: String, password: String): Option[User] = findOne(MongoDBObject("userId" -> userId, "password" -> password))
+      
+      def getUserName(id : Object) = 
+      {
+          val p = dao.findOne(MongoDBObject("_id" -> id))
+          p match {
+            case Some(user) => user.userId
+            case None => "Not Exists User."
+          }
+      }
+
+      def findId(name : String) = {      
+          val p = dao.find(MongoDBObject("userId" -> name))
+          val id = p.next.id
+          id      
+      }
+}

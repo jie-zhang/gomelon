@@ -24,9 +24,7 @@ object Salons extends Controller {
 
     // TODO
     // Option when null
-    // enum for nav.
-    val nav: String = "salon-basic"
-    Ok(views.html.salon.store.homepage(navInSalon = nav, salon = salon.get))
+    Ok(views.html.salon.store.salonInfoBasic(salon = salon.get))
   }
 
 

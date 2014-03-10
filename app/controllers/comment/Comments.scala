@@ -28,7 +28,7 @@ object Comments extends Controller {
     implicit request =>      
       val user_id = request.session.get("user_id").get
       val userId = new ObjectId(user_id)
-      val username = User.getUsername(userId)
+      val username = User.getUserName(userId)
     clean() 
     Ok(views.html.comment.comment(username, userId, Comment.all(commentedId)))
   }

@@ -47,7 +47,7 @@ object Blogs extends Controller {
     val userId = new ObjectId("53195c87a89e175858abce80")
     val list = Blog.findByUserId(userId)
     // 目前传递的是username，可能需要传真实姓名或者是昵称，待完善
-    val name = User.getUsername(userId)
+    val name = User.getUserName(userId)
     // 这边时间的format需要调整，目前的格式是2014/03/05 9:04:08，，，，可能需要调整
     Ok(views.html.blog.blogTest(name, list))
   }

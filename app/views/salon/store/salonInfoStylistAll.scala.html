@@ -1,0 +1,8 @@
+@(salon: Salon, stylists: Seq[Stylist])
+
+@salonInfoMain(navInSalon = "salon-stylist", salon) {
+
+    <!-- Get All the Salons with all the styles.  -->
+    @views.html.stylist.group(stylists)
+
+}
