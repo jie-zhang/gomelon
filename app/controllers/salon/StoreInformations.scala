@@ -14,6 +14,19 @@ import play.api.templates._
 import java.util.Date
 
 object BasicInformations extends Controller{
+
+  def registerForm(id: ObjectId = new ObjectId) = Form(
+    mapping(
+      "id" -> ignored(id),
+      "storeId" -> nonEmptyText,
+      "storeNm" -> text(minLength = 6),
+      "homePage" -> text) {
+        (id, storeId, storeNm, homePage) =>
+          BasicInformation(id, storeId, storeNm, "none", homePage,new Date(), "none", "none", "none", "none", "none", "none", new Date(), "8", 000, 000, 000)
+      }{
+        basicInformation => Some((basicInformation.id, basicInformation.storeId, basicInformation.storeNm, basicInformation.homePage))
+      })
+        
   val basicInformation:Form[BasicInformation] = Form(
 	    mapping(
 	        "storeId" -> text,
@@ -80,21 +93,39 @@ object BasicInformations extends Controller{
    * 店铺基本信息显示
    *
    */
-  def storeInfo = Action {
-    val storeId: String = "abc123"
-    val basicInformation = BasicInformation.findOneBystoreId(storeId).get 
-    val basic = BasicInformations.basicInformation.fill(basicInformation)
-    Ok(views.html.salon.basicInformation(basic))  
-  }
+//  def storeInfo = Action {
+//    val storeId: String = "abc123"
+//    val basicInformation = BasicInformation.findOneBystoreId(storeId).get 
+//    val basic = BasicInformations.basicInformation.fill(basicInformation)
+//    Ok(views.html.salon.basicInformation(basic))  
+//  }
 
+  def storeInfo(storeId: String) = Action {
+    BasicInformation.findOneBystoreId(storeId).map { basicInformation =>
+      val basic = BasicInformations.basicInformation.fill(basicInformation)
+      Ok(views.html.salon.basicInformation(basic))
+    } getOrElse {
+      NotFound
+    }
+  }
+  
   /**
    * 店铺详细信息显示
    */
-  def detailedInfo = Action {
-    val storeId: String = "abc123"
-    val detailedInformation = DetailedInformation.findOneBystoreId(storeId).get
-    val detailed = BasicInformations.detailedInformation.fill(detailedInformation)
-    Ok(views.html.salon.detailedInformation(detailed))
+//  def detailedInfo = Action {
+//    val storeId: String = "abc123"
+//    val detailedInformation = DetailedInformation.findOneBystoreId(storeId).get
+//    val detailed = BasicInformations.detailedInformation.fill(detailedInformation)
+//    Ok(views.html.salon.detailedInformation(detailed))
+//  }
+
+  def detailedInfo(storeId: String) = Action {
+    DetailedInformation.findOneBystoreId(storeId).map { detailedInformation =>
+      val detailed = BasicInformations.detailedInformation.fill(detailedInformation)
+      Ok(views.html.salon.detailedInformation(detailed))
+    } getOrElse {
+      NotFound
+    }
   }
 
  /**
@@ -106,7 +137,7 @@ object BasicInformations extends Controller{
       {
         basicInformation =>
           BasicInformation.save(basicInformation.copy(id = id), WriteConcern.Safe)
-          Redirect(routes.BasicInformations.detailedInfo)
+          Redirect(routes.BasicInformations.detailedInfo(basicInformation.storeId))
       })
   }
   
@@ -119,8 +150,27 @@ object BasicInformations extends Controller{
       {
         detailedInformation =>
           DetailedInformation.save(detailedInformation.copy(id = id), WriteConcern.Safe)
-          Redirect(routes.BasicInformations.detailedInfo)
+          Redirect(routes.BasicInformations.detailedInfo(detailedInformation.storeId))
       })
   }
 
+    /**
+   * 店铺注册页面
+   */
+  def store = Action {
+    Ok(views.html.salon.addInformation("Your new application is ready."))
+  }
+  
+  /**
+   * 店铺基本信息注册
+   */
+  def storeRegister = Action { implicit request =>
+    registerForm().bindFromRequest.fold(
+  		error => BadRequest(views.html.error.errorBasic(error)),
+      {
+        basicInformation =>
+          BasicInformation.save(basicInformation, WriteConcern.Safe)
+          Redirect(routes.BasicInformations.storeInfo(basicInformation.storeId))
+      })
+  }
 }

@@ -18,11 +18,12 @@ GET     /myPage/:userId                 controllers.Users.myPage(userId)
 # Salon 
 GET     /salon                          controllers.Salons.index
 GET     /salon/:id                      controllers.Salons.getSalon(id: ObjectId)
-GET     /storeInformation               controllers.BasicInformations.storeInfo
-GET     /storeInformationD               controllers.BasicInformations.detailedInfo
-GET     /storeUpdateB/:id                controllers.BasicInformations.storeUpd(id :ObjectId)
-GET     /storeUpdateD/:id                controllers.BasicInformations.storeUpdDet(id :ObjectId)
-
+GET     /basicRegister					controllers.BasicInformations.store
+GET     /storeInformation/:storeId      controllers.BasicInformations.storeInfo(storeId)
+GET     /storeInformationD/:storeId     controllers.BasicInformations.detailedInfo(storeId)
+GET     /storeUpdateB/:id               controllers.BasicInformations.storeUpd(id :ObjectId)
+GET     /storeUpdateD/:id               controllers.BasicInformations.storeUpdDet(id :ObjectId)
+GET     /storeRegister              	controllers.BasicInformations.storeRegister
 
 # Style
 GET     /style                          controllers.Styles.index
