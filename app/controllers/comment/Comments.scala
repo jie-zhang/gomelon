@@ -20,36 +20,46 @@ object Comments extends Controller {
   val formHuifuComment = Form((
     "content" -> text
   ))
-  
 
-  
-  def find(commentedId : ObjectId) = Action {
-    
+  /**
+   * 查找数据库中关于该评论的所有数据，包括回复的。
+   */
+  def find(commentedId : ObjectId) = Action {    
     implicit request =>      
       val user_id = request.session.get("user_id").get
       val userId = new ObjectId(user_id)
       val username = User.getUsername(userId)
     clean() 
     Ok(views.html.comment.comment(username, userId, Comment.all(commentedId)))
-
   }
   
+  /**
+   * 清除list
+   */
   implicit def clean() = {
     Comment.list = Nil
   }
-  
+  /**
+   * 增加评论，跳转
+   */
   def addComment(commentedId : ObjectId) = Action {
     Ok(views.html.comment.addComment(commentedId, formAddComment))
   }
   
-  // 这是数据库中的被评论对象的ObjectId的编号
+  /**
+   * 前台展示
+   */
   def test = Action {
-    val commentedId = new ObjectId("53167d81a89e21dea32868dd")
+    // 这是数据库中的被评论对象的ObjectId的编号
+    val commentedId = new ObjectId("53195fb4a89e175858abce82")
     clean() 
     val list = Comment.all(commentedId)
     Ok(views.html.comment.commentTest(list))
   }
   
+  /**
+   * 增加评论，后台逻辑
+   */
   def addC(commentedId : ObjectId) = Action {
     implicit request =>
       val user_id = request.session.get("user_id").get      // TODO这边需要分类。。。！！！
@@ -57,19 +67,12 @@ object Comments extends Controller {
         //处理错误
         errors => BadRequest(views.html.comment.addComment(commentedId, errors)),
         {
-//          case (cmUsername, cmTime, cmContent, cmService, cmAddContent) =>
           case (content) =>
             val userId = new ObjectId(user_id) // 这边需要用session取得用户名之类的东西
-//            val time = nowTime
-//            val status = 0
-//            val commentedId = new ObjectId(user_id)
-            val relevantUser = new ObjectId(user_id)
-            
+            val relevantUser = new ObjectId(user_id)            
 	        Comment.addComment(userId, content, commentedId, relevantUser)
-	        
-//            Ok(Html("评论成功"))
-//	        Redirect(routes.Comment.find).withSession(request.session+("_id" -> _id))
-	        Redirect(routes.Comments.find(commentedId))
+//	        Redirect(routes.Comments.find(commentedId))
+	        Redirect(routes.Comments.test)
         }
                 
           
@@ -77,23 +80,31 @@ object Comments extends Controller {
         )
   }
   
-//  def complaint = Action {
-//    Ok(views.html.complaint(request.session.get("_id").get))
-//  }
-  
+  /**
+   * 店家的申诉
+   */
   def complaint(id : ObjectId) = Action {
     Ok(Html("我要申诉的评论Id是" + id))
   }
   
+  /**
+   * 店家回复，跳转
+   */
   def answer(id : ObjectId, commentedId : ObjectId) = Action {
     Ok(views.html.comment.answer(id, commentedId, formHuifuComment))
   }
   
+  /**
+   * 管理员的功能，删除评论
+   */
   def delete(id : ObjectId, commentedId : ObjectId) = Action {
     Comment.delete(id)
     Redirect(routes.Comments.find(commentedId))
   }
   
+  /**
+   * 店家回复，后台逻辑
+   */
   def huifu(id : ObjectId, commentedId : ObjectId) = Action {
     implicit request =>
       val user_id = request.session.get("user_id").get
@@ -101,16 +112,10 @@ object Comments extends Controller {
         //处理错误
         errors => BadRequest(views.html.comment.answer(id, commentedId, errors)),
         {
-//          case (cmUsername, cmTime, cmContent, cmService, cmAddContent) =>
           case (content) =>
             val username = new ObjectId(user_id)
-            println("content" + content, "username" + username)
 	        Comment.huifu(id, content, username)
-
-//            Ok(Html("评论成功"))
-//	        Redirect(routes.Comment.find).withSession(request.session+("_id" -> _id))
 	        Redirect(routes.Comments.find(commentedId))
-//	        Ok(Html("test"))
         } 
         )
   }

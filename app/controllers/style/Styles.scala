@@ -36,7 +36,7 @@ object Styles extends Controller {
     val salon: Option[Salon] = Salon.findById(salonId)    
     val style: Option[Style] = Style.findBySalon(salonId, styleId)    
 
-    val nav: String = "style"
+    val nav: String = "salon-style"
     // TODO: process the salon not exist pattern.
     Ok(html.salon.store.homepage(navInSalon = nav, salon = salon.get, style = style))
  }

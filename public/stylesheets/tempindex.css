@@ -1857,10 +1857,10 @@ width: 140px;
 height: 35px;
 }
 
-.stylistCurrent {
-background-position: -280px -870px;
+.stylist {
+background-position: -280px -750px;
 width: 85px;
-height: 37px;
+height: 35px;
 }
 
 .style {
@@ -1885,4 +1885,56 @@ height: 35px;
 background-position: -620px -750px;
 width: 90px;
 height: 35px;
+}
+
+
+.salonInformationCurrent {
+background-position: 0 -870px;
+width: 140px;
+height: 37px;
+}
+
+.couponAndMenuCurrent {
+background-position: -140px -870px;
+width: 140px;
+height: 37px;
+}
+
+.stylistCurrent {
+background-position: -280px -870px;
+width: 85px;
+height: 37px;
+}
+
+.styleCurrent {
+background-position: -365px -870px;
+width: 85px;
+height: 37px;
+}
+
+.blogCurrent {
+background-position: -450px -870px;
+width: 85px;
+height: 37px;
+}
+
+.accessMapCurrent {
+background-position: -535px -870px;
+width: 85px;
+height: 37px;
+}
+
+.kuchikomiCurrent {
+background-position: -620px -870px;
+width: 90px;
+height: 37px;
+}
+
+
+.w156 {
+width: 156px;
+}
+
+.mT50 {
+margin-top: 50px;
 }

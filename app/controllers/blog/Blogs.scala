@@ -12,17 +12,6 @@ import com.mongodb.casbah.Imports.ObjectId
 
 object Blogs extends Controller {
   
-    
-  val formAddComment = Form((
-    "content" -> nonEmptyText
-  ))
-  
-  val formHuifuComment = Form((
-    "content" -> text
-  ))
-  
-
-    
   val formBlog = Form(tuple(
     "title" -> nonEmptyText,   
     "content" -> nonEmptyText,
@@ -30,14 +19,18 @@ object Blogs extends Controller {
     "tags" -> nonEmptyText
   ))
 
-  
+  /**
+   * 创建blog，跳转
+   */
   def newBlog(userId : ObjectId) = Action {
     // list是一个blog分类的list
-//    val list = Blog.getCatagories(userId)
     val list = BlogCatagory.getCatagory(userId)
     Ok(views.html.blog.blog(userId, formBlog, list))
   }
   
+  /**
+   * 用户删除blog
+   */
   def deleteBlog(id : ObjectId) = Action {
      implicit request =>
       val user_id = request.session.get("user_id").get
@@ -46,21 +39,24 @@ object Blogs extends Controller {
     Redirect(routes.Blogs.showBlog(userId))
   }
   
+  /**
+   * 前台显示
+   */
   // 这是数据库中用户的ObjectId
   def test = Action {
-    val userId = new ObjectId("5315b707a89edbf29369926c")
+    val userId = new ObjectId("53195c87a89e175858abce80")
     val list = Blog.findByUserId(userId)
     // 目前传递的是username，可能需要传真实姓名或者是昵称，待完善
     val name = User.getUsername(userId)
-//    println("---------"+list(0).createdTime.toLocaleString.formatted("YY/MM/DD"))
-//    println("---------"+list(0).createdTime.toLocaleString())
     // 这边时间的format需要调整，目前的格式是2014/03/05 9:04:08，，，，可能需要调整
     Ok(views.html.blog.blogTest(name, list))
   }
   
+
   
   /**
    * 这个参数是userid的意思 showBlogByUserId
+   * 显示一个用户的所有blog
    */
   def showBlog(id : ObjectId) = Action {
     val list = Blog.showBlog(id)
@@ -68,15 +64,19 @@ object Blogs extends Controller {
   }
   
   /**
+   * 显示某一条blog
    * 通过blog的id找到blog
    */
   def showBlogById(id : ObjectId) = Action {
     val list = Blog.showBlogById(id)
-    Ok(views.html.blog.findBlogs(id, list))
+//    Ok(views.html.blog.findBlogs(id, list))
+    Ok(views.html.blog.blogDetail(id, list))
   }
   
-  def writeBlog(id : ObjectId) = Action {
-    
+  /**
+   * 新建blog，后台逻辑
+   */
+  def writeBlog(id : ObjectId) = Action {   
       implicit request =>
       formBlog.bindFromRequest.fold(
         //处理错误
@@ -85,11 +85,7 @@ object Blogs extends Controller {
           case (title,content,blogTyp,tags) => 
 	        Blog.newBlog(id, title,content,blogTyp,tags)
 	        Ok(views.html.blog.showBlog(id))
-        }
-                
-          
-            
+        }             
         )
-  }
-  
+  }  
 }
