@@ -1762,3 +1762,127 @@ display: block;
 -webkit-margin-start: 0px;
 -webkit-margin-end: 0px;
 }
+
+
+/* add by jie-zhang@2014/03/08
+ * for Salon Page.
+ *
+ *
+ */
+#salonMainContents {
+float: left;
+width: 765px;
+}
+
+
+.detailHeader {
+	margin-bottom: 20px;
+	background-color: #F7F6EA;
+}
+.reserveBtnArea { background-color: #F0ECE5; }
+.headerLogoInner {
+	background: url(/CSP/img/common/logo/b_logo_GR.png?switch=20140227) no-repeat 0 0;
+	width: 88px;
+	height: 30px;
+	text-indent: -9999px;
+	display: block;
+}
+
+.pr {
+position: relative;
+zoom: 1;
+}
+
+.cFix {
+min-height: 1px;
+_height: 1px;
+}
+
+
+.salonMainContentsFooter {
+margin-top: 20px;
+}
+
+#salonBottomSummary {
+color: #666666;
+text-align: right;
+}
+
+
+.listImmediately {
+background-position: -140px -3240px;
+width: 60px;
+height: 15px;
+}
+
+
+.listNominate {
+background-position: -140px -3280px;
+width: 60px;
+height: 15px;
+}
+
+.listPoint {
+background-position: -132px -3400px;
+width: 68px;
+height: 15px;
+}
+
+.listMensOK {
+background-position: -133px -3470px;
+width: 67px;
+height: 15px;
+}
+
+.fgLGray2 {
+color: #7F7F7F;
+}
+
+.menuBG {
+padding: 0 11px 0 10px;
+background-position: 0 -940px;
+height: 37px;
+}
+
+
+.salonInformation {
+background-position: 0 -750px;
+width: 140px;
+height: 35px;
+}
+
+.couponAndMenu {
+background-position: -140px -750px;
+width: 140px;
+height: 35px;
+}
+
+.stylistCurrent {
+background-position: -280px -870px;
+width: 85px;
+height: 37px;
+}
+
+.style {
+background-position: -365px -750px;
+width: 85px;
+height: 35px;
+}
+
+.blog {
+background-position: -450px -750px;
+width: 85px;
+height: 35px;
+}
+
+.accessMap {
+background-position: -535px -750px;
+width: 85px;
+height: 35px;
+}
+
+.kuchikomi {
+background-position: -620px -750px;
+width: 90px;
+height: 35px;
+}

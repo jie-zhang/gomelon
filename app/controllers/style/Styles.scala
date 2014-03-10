@@ -23,8 +23,8 @@ object Styles extends Controller {
    * 
    */
   def findById(styleId: ObjectId) = Action {
-    val style: Seq[Style] = Style.findById(styleId)
-    Ok(html.style.overview(style))
+    val style: Option[Style] = Style.findById(styleId)
+    Ok(html.style.overview(style.toList))
   }
   
   def findBySalon(salonId: ObjectId) = Action {
@@ -32,9 +32,13 @@ object Styles extends Controller {
     Ok(html.style.overview(stylsOfSalon))
   }
 
-  def findBySalonAndId(salonId: ObjectId, styleId: ObjectId) = Action {
-    val styleOfSalon: Seq[Style] = Style.findBySalon(salonId, styleId)    
-    Ok(html.style.details(styleOfSalon))
+  def getStyleInfoOfSalon(salonId: ObjectId, styleId: ObjectId) = Action {
+    val salon: Option[Salon] = Salon.findById(salonId)    
+    val style: Option[Style] = Style.findBySalon(salonId, styleId)    
+
+    val nav: String = "style"
+    // TODO: process the salon not exist pattern.
+    Ok(html.salon.store.homepage(navInSalon = nav, salon = salon.get, style = style))
  }
   
 

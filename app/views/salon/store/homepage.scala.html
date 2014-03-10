@@ -1,0 +1,57 @@
+@(navInSalon: String = "salon-basic", salon: Salon, style: Option[Style] = None, stylist: Option[Stylist] = None, blog: Option[String] = None, comment: Option[String] = None)
+
+
+<!-- the main page of salon.
+     plan to use this as the main frame of the pages as below:
+     1. a salon.
+     2. a style. /style list of a salon.
+     3. a stylist. /stylist list of a salon.
+     4. a blog. /blog list of a salon's stylists.
+     5. a comment?. /comments to the work of stylists belongs to a salon, and the salon's environment. 
+     6. the map of a salon.
+
+TODO
+    1. blog, comment type should be type of Option[Blog], Option[Comment]
+
+  -->
+
+
+@main("todo", "hair-salon") {
+
+    <!-- ↓navigation bar -->
+    @views.html.common.navigationBar()
+    <!-- ↑navigation bar -->
+
+    <!-- ↓contents-->
+    <div id="contents" class="cFix">
+
+        <!-- ↓mainContents -->
+        <div id="salonMainContents">
+
+	    <!-- ↓salonInfoHeader -->
+	    @views.html.salon.store.salonInfoHeader(navInSalon, salon)
+	    <!-- ↓salonInfoHeader -->
+
+            <!-- ↓salonInfoBody -->
+            <!--TODO  define a type, an Enum type to express the parameters... -->  
+            @views.html.salon.store.salonInfoBody(navInSalon, salon, style, stylist, blog, comment)
+            <!-- ↑salonInfoBody -->  
+
+            <!-- ↓salonInfoFooter  -->
+            @views.html.salon.store.salonInfoFooter(navInSalon, salon)
+            <!-- ↑salonInfoFooter  -->  
+
+        </div>
+        <!-- ↑mainContents -->
+
+        <!-- ↓sideContents -->
+        @views.html.salon.store.rightColumn(None)
+        <!-- ↑sideContents -->
+
+    </div> 
+    <!-- ↑contents-->
+    
+    <!-- ↓footer -->
+    <!-- TODO -->
+    <!-- ↑footer -->
+}
