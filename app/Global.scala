@@ -5,6 +5,9 @@ import anorm._
 
 import com.mongodb.casbah.commons.Imports._
 import org.bson.types.ObjectId
+import java.util.Date
+
+
 
 object Global extends GlobalSettings {
   
@@ -89,6 +92,13 @@ object InitialData {
 	  Service(new ObjectId("5316ecffd4d57997ce3e6d9d"), "盘发2", "其他", 100, 80) 
 	).foreach(Service.save)
 
+    }
+    
+    if(Blog.findByUserId(new ObjectId("53195c87a89e175858abce80")).isEmpty) {
+      val date = new Date()
+      Seq (
+          Blog(new ObjectId("53195fb4a89e175858abce82"), new ObjectId("53195c87a89e175858abce80"),date, 0, "java", "心情", "It","java学习")
+        ).foreach(Blog.save)
     }
 
 

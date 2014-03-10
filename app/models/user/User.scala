@@ -43,4 +43,16 @@ trait UserDAO extends ModelCompanion[User, ObjectId] {
   def findByNickNm(nickNm: String) = dao.find(MongoDBObject("nickNm" -> nickNm))
   def findByEmail(email: String) = dao.find(MongoDBObject("email" -> email))
   def authenticate(userId: String, password: String): Option[User] = findOne(MongoDBObject("userId" -> userId, "password" -> password))
-}
+  
+  def getUsername(id : Object) = 
+    {
+    val p = dao.find(MongoDBObject("_id" -> id))
+    val username = p.next.userId
+    username
+    }
+  def findId(name : String) = {	  
+  	  val p = dao.find(MongoDBObject("userId" -> name))
+  	  val id = p.next.id
+	  id	  
+  }
+  }

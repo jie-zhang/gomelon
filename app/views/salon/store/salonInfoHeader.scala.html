@@ -115,7 +115,9 @@
 		    </a>
 		</li>
 		<li class="fl">
-		    <a href="http://beauty.hotpepper.jp/slnH000231733/blog/" class="@if(navInSalon == "salon-blog") {bS db blogCurrent offL} else {bS db blog offL}">
+		    <!--  <a href="http://beauty.hotpepper.jp/slnH000231733/blog/" class="bS db blog offL">-->
+		    <a href="@routes.Blogs.test" class="bS db blog offL">
+
 			ブログ
 		    </a>
 		</li>
@@ -125,7 +127,9 @@
 		    </a>
 		</li>
 		<li class="fr">
-		    <a href="http://beauty.hotpepper.jp/slnH000231733/review/" class="@if(navInSalon == "salon-review") {bS db kuchikomiCurrent offL} else {bS db kuchikomi offL}">
+		    <!-- <a href="http://beauty.hotpepper.jp/slnH000231733/review/" class="bS db kuchikomi offL"> -->
+		    <a href="@routes.Comments.test" class="bS db kuchikomi offL">
+
 			口コミ
 		    </a>
 		</li>

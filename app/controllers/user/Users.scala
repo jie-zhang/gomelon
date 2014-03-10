@@ -38,7 +38,7 @@ object Users extends Controller {
       {
         user => Some((user.id, user.userId, (user.password, ""), user.nickNm, user.birthDay, user.sex, user.city, user.job, user.email, user.tel, user.qq, user.msn, user.weChat, false))
       }.verifying(
-        "This userId is not available",user => User.findOneByUserId(user.userId).nonEmpty)
+        "This userId is not available",user => !User.findOneByUserId(user.userId).nonEmpty)
   )
 
   val loginForm = Form(tuple(
@@ -103,7 +103,9 @@ object Users extends Controller {
       errors => BadRequest(views.html.user.login(errors)),
       {
         user =>
-          Redirect(routes.Users.myPage(user._1))
+//          Redirect(routes.Users.myPage(user._1))
+          val user_id = User.findId(user._1)
+          Redirect(routes.MyPages.myPageMain).withSession(request.session+("user_id" -> user_id.toString()))
       })
   }
 
