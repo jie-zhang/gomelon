@@ -18,6 +18,10 @@ GET     /myPage/:userId                 controllers.Users.myPage(userId)
 # Salon 
 GET     /salon                          controllers.Salons.index
 GET     /salon/:id                      controllers.Salons.getSalon(id: ObjectId)
+GET     /storeInformation               controllers.BasicInformations.storeInfo
+GET     /storeInformationD               controllers.BasicInformations.detailedInfo
+GET     /storeUpdateB/:id                controllers.BasicInformations.storeUpd(id :ObjectId)
+GET     /storeUpdateD/:id                controllers.BasicInformations.storeUpdDet(id :ObjectId)
 
 
 # Style
