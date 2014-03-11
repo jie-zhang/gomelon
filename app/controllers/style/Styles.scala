@@ -38,19 +38,8 @@ object Styles extends Controller {
   def getStyleInfoOfSalon(salonId: ObjectId, styleId: ObjectId) = Action {
     val salon: Option[Salon] = Salon.findById(salonId)    
     val style: Option[Style] = Style.findBySalon(salonId, styleId)    
-<<<<<<< HEAD
-    val stylistId = style.get.stylistId
-    val styles = Seq(style.get)
-    println("stylistId .."+stylistId)
-    val stylists : Seq[Stylist] = Stylist.findById(stylistId)
-    val nav: String = "style"
-    // TODO: process the salon not exist pattern.
-    Ok(html.salon.store.homepage(navInSalon = nav, salon = salon.get, style = styles, stylist = stylists))
-=======
-
-    // TODO: process the salon not exist pattern.
     Ok(html.salon.store.salonInfoStyle(salon = salon.get, style = style.get))
->>>>>>> 2f0a55ed316c166a8933b0a2bdc30bf8afccbb55
+
  }
   
 
