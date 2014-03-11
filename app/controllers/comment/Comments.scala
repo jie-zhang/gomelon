@@ -57,6 +57,16 @@ object Comments extends Controller {
     Ok(views.html.comment.commentTest(list))
   }
   
+  // 模块化代码
+  def findBySalon(salonId: ObjectId) = Action {
+    Comment.commentlist = Nil
+    val salon: Option[Salon] = Salon.findById(salonId)    
+    val comments: Seq[Comment] = Comment.findBySalon(salonId)    
+
+    // TODO: process the salon not exist pattern.
+    Ok(views.html.salon.store.salonInfoCommentAll(salon = salon.get, comments = comments))
+  }
+  
   /**
    * 增加评论，后台逻辑
    */
@@ -119,7 +129,4 @@ object Comments extends Controller {
         } 
         )
   }
-
-
-
 }
