@@ -1,8 +1,8 @@
-@(salon: Salon, style: Style)
+@(salon: Salon, stylist: Stylist)
 
 @salonInfoMain(navInSalon = "salon-basic", salon) {
 
     <!-- Get All the Salons with all the styles.  -->
-    @views.html.style.item(style)
+    @views.html.stylist.item(stylist)
 
 }
