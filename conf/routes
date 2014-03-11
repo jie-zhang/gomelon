@@ -5,6 +5,10 @@
 # Home page
 GET     /                               controllers.Application.index
 
+#get photo
+
+GET		/getPhoto/:name					controllers.Application.getPhoto(name: String)
+
 # User Management
 GET     /login                          controllers.Application.login()
 GET     /register                       controllers.Application.register()
@@ -38,6 +42,7 @@ GET     /salon/:slnId/style/:styId      controllers.Styles.getStyleInfoOfSalon(s
 
 
 # Stylist
+GET		/stylistViews/:id				controllers.Stylists.findStylistById(id: ObjectId)
 GET     /stylist/:id                    controllers.Stylists.findById(id: ObjectId)
 GET     /salon/:salonId/stylists        controllers.Stylists.findBySalon(salonId: ObjectId)
 GET     /findStylist                    controllers.Stylists.findStylist
