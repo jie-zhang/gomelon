@@ -100,10 +100,11 @@ object InitialData {
     }
     
     if(Image.findAll.isEmpty) {
-     val file = new File("C:/Users/HZ-HAN/Documents/GitHub/salon/gomelon/public/images")
-     val files = Image.listAllFiles(file)
-      files.foreach(f=>Image.save(f)) 
-    
+      // val file = new File(controllers.routes.Assets.at("/images").toString())
+      print("aaa" + play.Play.application().path())
+      val file = new File(play.Play.application().path() + "/public/images")
+      val files = Image.listAllFiles(file)
+        files.foreach(f=>Image.save(f)) 
     }
 
   }
