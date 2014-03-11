@@ -94,6 +94,8 @@ GET     /complaint/:cmId                 controllers.Comments.complaint(cmId : O
 GET     /testComment                     controllers.Comments.test
 POST     /addC/:commentedId              controllers.Comments.addC(commentedId : ObjectId)
 
+GET    /salon/:salonId/comments          controllers.Comments.findBySalon(salonId: ObjectId)
+
 
 # add Blog
 GET     /newBlog/:id                     controllers.Blogs.newBlog(id : ObjectId)
@@ -108,6 +110,12 @@ GET     /writeBlogCatagory/:userId       controllers.BlogCatagories.writeBlogCat
 GET     /delBlogCatarory/:userId/:blogCatagory    controllers.BlogCatagories.delBlogCatarory(userId : ObjectId, blogCatagory : String)
 GET     /modBlogCatarory/:userId/:blogCatagory    controllers.BlogCatagories.modBlogCatarory(userId : ObjectId, blogCatagory : String)
 GET     /modCatagory/:userId/:blogCatagory        controllers.BlogCatagories.modCatagory(userId : ObjectId, blogCatagory : String)
+
+
+
+GET     /salon/:slnId/blog/:blogId      controllers.Blogs.getBlogInfoOfSalon(slnId: ObjectId, blogId: ObjectId)
+
+GET     /salon/:salonId/blogs          controllers.Blogs.findBySalon(salonId: ObjectId)
 
 
 #add by wu end 

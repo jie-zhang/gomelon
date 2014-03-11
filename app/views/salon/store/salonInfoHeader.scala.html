@@ -115,7 +115,7 @@
 		    </a>
 		</li>
 		<li class="fl">
-		    <a href="@routes.Blogs.test" class="@if(navInSalon == "salon-blog") {bS db blogCurrent offL} else {bS db blog offL}">
+		    <a href="/salon/@salon.id/blogs" class="@if(navInSalon == "salon-blog") {bS db blogCurrent offL} else {bS db blog offL}">
 			ブログ
 		    </a>
 		</li>
@@ -125,7 +125,7 @@
 		    </a>
 		</li>
 		<li class="fr">
-		    <a href="@routes.Comments.test" class="@if(navInSalon == "salon-blog") {bS db kuchikomiCurrent offL} else {bS db kuchikomi offL}">
+		    <a href="/salon/@salon.id/comments" class="@if(navInSalon == "salon-comment") {bS db kuchikomiCurrent offL} else {bS db kuchikomi offL}">
 			口コミ
 		    </a>
 		</li>

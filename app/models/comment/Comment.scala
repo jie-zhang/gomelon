@@ -44,6 +44,26 @@ object Comment extends ModelCompanion[Comment, ObjectId] {
      list.reverse
     }
   
+  // 模块化的代码，通过店铺Id找到评论,应该是通过店铺找到coupon，再找到coupon下面的评论
+  var commentlist : List[Comment] = Nil
+  def findBySalon(salonId: ObjectId): List[Comment] = {
+    val stylist = Stylist.findBySalon(salonId)
+    println("stylist" + stylist)
+    var comment : List[Comment] = Nil
+    stylist.foreach(
+      {
+      r => 
+      comment = Comment.find(DBObject("userId" -> r.id)).toList
+      println("blog" + comment)
+      if(!comment.isEmpty)
+//        blog :::= bloglist
+          commentlist :::= comment
+      }
+    )
+    commentlist
+    
+  }
+  
   def addComment(userId : ObjectId, content : String, commentedId : ObjectId, relevantUser : ObjectId) = {
     dao.save(Comment(userId = userId, status = 0, commentedId = commentedId, relevantUser = relevantUser, commentedType = 1, content = content))    
   }
