@@ -103,9 +103,9 @@ object Users extends Controller {
       errors => BadRequest(views.html.user.login(errors)),
       {
         user =>
-//          Redirect(routes.Users.myPage(user._1))
-          val user_id = User.findId(user._1)
-          Redirect(routes.MyPages.myPageMain).withSession(request.session+("user_id" -> user_id.toString()))
+          Redirect(routes.Users.myPage(user._1))
+//          val user_id = User.findId(user._1)
+//          Redirect(routes.MyPages.myPageMain).withSession(request.session+("user_id" -> user_id.toString()))
       })
   }
 
@@ -115,7 +115,7 @@ object Users extends Controller {
       {
         user =>
           User.save(user, WriteConcern.Safe)
-          Ok(views.html.user.myPage(user))
+          Ok(views.html.user.myPageRes(user))
       })
   }
 
@@ -141,6 +141,31 @@ object Users extends Controller {
 
   def myPage(userId :String) = Action{
     val user = User.findOneByUserId(userId).get
-    Ok(views.html.user.myPage(user))
-}
+    Ok(views.html.user.myPageRes(user))
+ }
+  
+  def myReservation(userId: ObjectId) = Action {
+    val user: Option[User] = User.findById(userId)
+    Ok(views.html.user.myPageRes(user = user.get))
+  }
+  
+  def mySaveCoupon(userId: ObjectId) = Action {
+    val user: Option[User] = User.findById(userId)
+    Ok(views.html.user.mySaveCoupon(user = user.get))
+  }
+  
+  def mySaveBlog(userId: ObjectId) = Action {
+    val user: Option[User] = User.findById(userId)
+    Ok(views.html.user.mySaveBlog(user = user.get))
+  }
+  
+  def mySaveStyle(userId: ObjectId) = Action {
+    val user: Option[User] = User.findById(userId)
+    Ok(views.html.user.mySaveStyle(user = user.get))
+  }
+  
+  def mySaveSalonActi(userId: ObjectId) = Action {
+    val user: Option[User] = User.findById(userId)
+    Ok(views.html.user.mySaveSalonActi(user = user.get))
+  }
 }

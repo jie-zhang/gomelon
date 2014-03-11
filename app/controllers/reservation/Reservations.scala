@@ -4,12 +4,15 @@ import play.api._
 import play.api.mvc._
 import play.api.data.Forms._
 import play.api.data.Form
+import java.util.Calendar
+import java.util.Date
+import com.mongodb.casbah.commons.Imports._
 
 object Reservations extends Controller{
 	/**
 	 * 进入到具体的店铺里，某产品的预约或者是更多服务的选择
 	 */
-	def reservHairView = Action {
+	def reservHairView(id: ObjectId) = Action {
 	  Ok(views.html.reservation.reservHairView("hello"))
 	}
 	

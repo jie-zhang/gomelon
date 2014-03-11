@@ -58,4 +58,8 @@ trait UserDAO extends ModelCompanion[User, ObjectId] {
           val id = p.next.id
           id      
       }
+      
+      def findById(id: ObjectId): Option[User] = {
+        dao.findOne(MongoDBObject("_id" -> id))
+    }
 }

@@ -1,5 +1,6 @@
 @(navInSalon: String = "salon-basic", salon: Salon)(content: Html)
 
+
 <!-- the main page of salon.
      plan to use this as the main frame of the pages as below:
      1. a salon.
@@ -17,31 +18,31 @@ TODO
 
 @main("todo", "hair-salon") {
 
-<!-- ↓contents -->
+<!-- 竊田ontents -->
 
-        <!-- ↓mainContents -->
+        <!-- 竊杜ainContents -->
         <div id="salonMainContents">
 
-	    <!-- ↓salonInfoHeader -->
+	    <!-- 竊都alonInfoHeader -->
 	    @views.html.salon.store.salonInfoHeader(navInSalon, salon)
-	    <!-- ↓salonInfoHeader -->
+	    <!-- 竊都alonInfoHeader -->
 
-            <!-- ↓salonInfoBody -->
+            <!-- 竊都alonInfoBody -->
             <!-- show different body contents according to the NAV tab. -->
             @content
-            <!-- ↑salonInfoBody -->  
+            <!-- 竊壮alonInfoBody -->  
 
-            <!-- ↓salonInfoFooter  -->
+            <!-- 竊都alonInfoFooter  -->
             @views.html.salon.store.salonInfoFooter(navInSalon, salon)
-            <!-- ↑salonInfoFooter  -->  
+            <!-- 竊壮alonInfoFooter  -->  
 
         </div>
-        <!-- ↑mainContents -->
+        <!-- 竊僧ainContents -->
 
-        <!-- ↓sideContents -->
+        <!-- 竊都ideContents -->
         @views.html.salon.store.rightColumn(None)
-        <!-- ↑sideContents -->
+        <!-- 竊壮ideContents -->
 
-<!-- ↑contents -->
+<!-- 竊祖ontents -->
 
 }

@@ -17,7 +17,14 @@ import mongoContext._
 case class Stylist(
     id: ObjectId = new ObjectId,
     label: String,
-    salonId: ObjectId
+    salonId: ObjectId,
+    userId: ObjectId,
+    workYears: String,
+    stylistStyle: List[String],
+    imageId: ObjectId,
+    consumerId: ObjectId,
+    description: String,
+    pictureName: String
 )
 
 
@@ -36,8 +43,8 @@ object Stylist {
         StylistDAO.find(MongoDBObject.empty).toList
     }
 
-    def findById(id: ObjectId): List[Stylist] = {
-        StylistDAO.findOne(MongoDBObject("_id" -> id)).toList
+    def findById(id: ObjectId): Option[Stylist] = {
+        StylistDAO.findOne(MongoDBObject("_id" -> id))
     }
 
     def findBySalon(salonId: ObjectId): List[Stylist] = {
@@ -48,7 +55,14 @@ object Stylist {
         StylistDAO.insert(
             Stylist(
                 label = stylist.label,
-                salonId = stylist.salonId
+                salonId = stylist.salonId,
+                userId = stylist.userId,
+                workYears = stylist.workYears,
+                stylistStyle = stylist.stylistStyle,
+                imageId = stylist.imageId,
+                consumerId = stylist.consumerId,
+                description = stylist.description,
+                pictureName = stylist.pictureName
             )
         )
     }
@@ -56,9 +70,18 @@ object Stylist {
     def save(stylist: Stylist) = {
         StylistDAO.save(
             Stylist(
-		id = stylist.id,
+            	id = stylist.id,
                 label = stylist.label,
-                salonId = stylist.salonId
+                salonId = stylist.salonId,
+                userId = stylist.userId,
+                workYears = stylist.workYears,
+                stylistStyle = stylist.stylistStyle,
+                imageId = stylist.imageId,
+                consumerId = stylist.consumerId,
+                description = stylist.description,
+                pictureName = stylist.pictureName
+                
+                
             )
         )
     }

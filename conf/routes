@@ -5,6 +5,10 @@
 # Home page
 GET     /                               controllers.Application.index
 
+#get photo
+
+GET		/getPhoto/:name					controllers.Application.getPhoto(name: String)
+
 # User Management
 GET     /login                          controllers.Application.login()
 GET     /register                       controllers.Application.register()
@@ -13,6 +17,11 @@ POST    /register                       controllers.Users.register
 POST    /update/:id                     controllers.Users.update(id: ObjectId)
 GET     /show/:userId                   controllers.Users.show(userId)
 GET     /myPage/:userId                 controllers.Users.myPage(userId)
+GET     /myPage/myReservation/:id		controllers.Users.myReservation(id: ObjectId)
+GET     /myPage/mySaveCoupon/:id		controllers.Users.mySaveCoupon(id: ObjectId)
+GET     /myPage/mySaveBlog/:id		 	controllers.Users.mySaveBlog(id: ObjectId)
+GET     /myPage/mySaveStyle/:id		 	controllers.Users.mySaveStyle(id: ObjectId)
+GET     /myPage/mySaveSalonActi/:id		controllers.Users.mySaveSalonActi(id: ObjectId)
 
 
 # Salon 
@@ -33,6 +42,7 @@ GET     /salon/:slnId/style/:styId      controllers.Styles.getStyleInfoOfSalon(s
 
 
 # Stylist
+GET		/stylistViews/:id				controllers.Stylists.findStylistById(id: ObjectId)
 GET     /stylist/:id                    controllers.Stylists.findById(id: ObjectId)
 GET     /salon/:salonId/stylists        controllers.Stylists.findBySalon(salonId: ObjectId)
 GET     /findStylist                    controllers.Stylists.findStylist
@@ -49,7 +59,7 @@ GET     /finishRecord/:id               controllers.Records.finishRecord(id: Obj
 GET     /findRecordByCondition          controllers.Records.findRecordByCondition
 
 #add reservation
-GET     /reservHairView                 controllers.Reservations.reservHairView
+GET     /reservHairView/:id             controllers.Reservations.reservHairView(id: ObjectId)
 GET     /reservSelectDate               controllers.Reservations.reservSelectDate
 GET     /reservSelectStylist            controllers.Reservations.reservSelectStylist
 POST    /reservConfirmPwd               controllers.Reservations.reservConfirmPwd
@@ -72,7 +82,6 @@ GET     /showService/:id                 controllers.Services.updateService(id: 
 GET     /myPageMain                      controllers.MyPages.myPageMain
 GET     /dianpu_guanzhu                  controllers.MyPages.dianpu_guanzhu
 GET     /stylist                         controllers.MyPages.stylist_guanzhu
-
 
 
 #add Comment

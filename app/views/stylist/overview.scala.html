@@ -1,9 +1,16 @@
 @(stylists: Seq[Stylist])
+	
+	<div class="oh w745 mT20 pH10">
+		
+				@views.html.stylist.group(stylists)
+				<div>
+				
+				
+				</div>
+				
+			
+	</div>
+    
+    
+    
 
-@main(Messages("hair.stylist"), nav = "hair-salon") {
-        
-    <!-- Get All the Salons with all the styles.  -->
-    @views.html.stylist.group(stylists)
-    
-    
-}

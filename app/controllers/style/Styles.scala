@@ -38,9 +38,8 @@ object Styles extends Controller {
   def getStyleInfoOfSalon(salonId: ObjectId, styleId: ObjectId) = Action {
     val salon: Option[Salon] = Salon.findById(salonId)    
     val style: Option[Style] = Style.findBySalon(salonId, styleId)    
-
-    // TODO: process the salon not exist pattern.
     Ok(html.salon.store.salonInfoStyle(salon = salon.get, style = style.get))
+
  }
   
 
