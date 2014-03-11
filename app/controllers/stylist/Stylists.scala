@@ -27,9 +27,13 @@ object Stylists extends Controller {
   }
   
   def findBySalon(salonId: ObjectId) = Action {
-    
+    val salon: Option[Salon] = Salon.findById(salonId)
+    val nav: String = "style"
     val stylistsOfSalon: Seq[Stylist] = Stylist.findBySalon(salonId)    
     Ok(html.stylist.overview(stylistsOfSalon))
+    val style: Seq[Style] = Style.findBySalonId(salonId) 
+    
+    Ok(html.salon.store.homepage(navInSalon = nav, salon = salon.get, style = style,  stylist = stylistsOfSalon))
     
   }
   

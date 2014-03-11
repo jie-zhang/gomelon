@@ -13,6 +13,7 @@ import com.novus.salat.Context
 
 import mongoContext._
 
+import models.Style._
 
 
 case class Style(
@@ -49,7 +50,11 @@ object Style {
     def findBySalon(salonId: ObjectId, styleId: ObjectId): Option[Style] = {
         StyleDAO.findOne(DBObject("salonId" -> salonId, "_id" -> styleId))
     }
-
+    
+    def findBySalonId(salonId: ObjectId): List[Style] = {
+         StyleDAO.find(DBObject("salonId" -> salonId)).toList
+    }
+    
     def create(style: Style): Option[ObjectId] = {
         StyleDAO.insert(
             Style(
