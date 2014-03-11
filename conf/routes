@@ -13,6 +13,11 @@ POST    /register                       controllers.Users.register
 POST    /update/:id                     controllers.Users.update(id: ObjectId)
 GET     /show/:userId                   controllers.Users.show(userId)
 GET     /myPage/:userId                 controllers.Users.myPage(userId)
+GET     /myPage/myReservation/:id		controllers.Users.myReservation(id: ObjectId)
+GET     /myPage/mySaveCoupon/:id		controllers.Users.mySaveCoupon(id: ObjectId)
+GET     /myPage/mySaveBlog/:id		 	controllers.Users.mySaveBlog(id: ObjectId)
+GET     /myPage/mySaveStyle/:id		 	controllers.Users.mySaveStyle(id: ObjectId)
+GET     /myPage/mySaveSalonActi/:id		controllers.Users.mySaveSalonActi(id: ObjectId)
 
 
 # Salon 
@@ -72,7 +77,6 @@ GET     /showService/:id                 controllers.Services.updateService(id: 
 GET     /myPageMain                      controllers.MyPages.myPageMain
 GET     /dianpu_guanzhu                  controllers.MyPages.dianpu_guanzhu
 GET     /stylist                         controllers.MyPages.stylist_guanzhu
-
 
 
 #add Comment
