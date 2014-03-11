@@ -55,6 +55,10 @@ object Style {
          StyleDAO.find(DBObject("salonId" -> salonId)).toList
     }
     
+    def findByStylistId(salonId: ObjectId, stylistId: ObjectId): List[Style] = {
+      StyleDAO.findOne(DBObject("salonId" -> salonId, "stylistId" -> stylistId)).toList
+    }
+    
     def create(style: Style): Option[ObjectId] = {
         StyleDAO.insert(
             Style(

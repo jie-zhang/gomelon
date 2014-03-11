@@ -4,8 +4,8 @@
 <body>
 <div class="w166 mHA">
     <div class="taC">
-        <a href="http://beauty.hotpepper.jp/slnH000231733/stylist/T000188298/">
-            <img src="http://imgbp.hotp.jp/CSP/IMG_SRC/19/34/B003961934/B003961934_164-219.jpg"
+        <a href="@routes.Stylists.findStylistById(stylist.id)">
+            <img src="@routes.Application.getPhoto(stylist.pictureName)"
             alt="弗里尔兄弟公司坂本隆文" class="bdImgGray w164 h219">
         </a>
     </div>
@@ -25,7 +25,8 @@
         <span class="fgPink">
        造型师
         </span>
-  （历史6岁）
+  （历史@stylist.workYears
+  年）
     </div>
     <div class="bdDotT mT5 pT5 fs10 hMin30">
     </div>
