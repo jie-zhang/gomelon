@@ -74,6 +74,12 @@
         <!-- ↓wrapper -->
         <div id="wrapper">
             <!-- ↓contents -->
+
+            <!-- ↓preContents: navigation bar-->
+            <!--TODO need a datat structure to keep the navigation path.-->
+            @views.html.common.navigationBar()
+            <!-- ↓preContents: navigation bar-->
+
             <div id="contents" class="cFix">
                 <!-- ↓mainContents -->
                 @content
@@ -137,7 +143,7 @@
                         </div>
                         <div class="postSalonInfo">
                             @Messages("main.toSalonOwners")
-                            <a target="_blank" title="@Messages("main.wantToJoin")" href="/doc/keisai/keisai.html"
+                            <a target="_blank" title="@Messages("main.wantToJoin")" href="/basicRegister"
                             onclick="customLinkLog('Footer Salon Link');">
                                 @Messages("main.wantToJoin")
                             </a>

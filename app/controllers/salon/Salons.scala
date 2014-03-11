@@ -20,8 +20,11 @@ object Salons extends Controller {
 
   
   def getSalon(salonId: ObjectId) = Action {
-    val salon: Seq[Salon] = Salon.findById(salonId).toList
-    Ok(views.html.salon.overview(salon))
+    val salon: Option[Salon] = Salon.findById(salonId)
+
+    // TODO
+    // Option when null
+    Ok(views.html.salon.store.salonInfoBasic(salon = salon.get))
   }
 
 

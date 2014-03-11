@@ -18,7 +18,12 @@ GET     /myPage/:userId                 controllers.Users.myPage(userId)
 # Salon 
 GET     /salon                          controllers.Salons.index
 GET     /salon/:id                      controllers.Salons.getSalon(id: ObjectId)
-
+GET     /basicRegister					controllers.BasicInformations.store
+GET     /storeInformation/:storeId      controllers.BasicInformations.storeInfo(storeId)
+GET     /storeInformationD/:storeId     controllers.BasicInformations.detailedInfo(storeId)
+GET     /storeUpdateB/:id               controllers.BasicInformations.storeUpd(id :ObjectId)
+GET     /storeUpdateD/:id               controllers.BasicInformations.storeUpdDet(id :ObjectId)
+GET     /storeRegister              	controllers.BasicInformations.storeRegister
 
 # Style
 GET     /style                          controllers.Styles.index
@@ -29,7 +34,7 @@ GET     /salon/:slnId/style/:styId      controllers.Styles.getStyleInfoOfSalon(s
 
 # Stylist
 GET     /stylist/:id                    controllers.Stylists.findById(id: ObjectId)
-GET     /salon/:salonId/Stylists        controllers.Stylists.findBySalon(salonId: ObjectId)
+GET     /salon/:salonId/stylists        controllers.Stylists.findBySalon(salonId: ObjectId)
 GET     /findStylist                    controllers.Stylists.findStylist
 GET     /checkStylist                   controllers.Stylists.checkStylist
 
@@ -62,10 +67,43 @@ GET     /showAllServices/:id             controllers.Services.deleteService(id: 
 GET     /showService                     controllers.Services.showService(id: ObjectId)
 GET     /showService/:id                 controllers.Services.updateService(id: ObjectId)
 
+#----------------------------------------------------------------------------------------------
+#add MyPage by wu start
+GET     /myPageMain                      controllers.MyPages.myPageMain
+GET     /dianpu_guanzhu                  controllers.MyPages.dianpu_guanzhu
+GET     /stylist                         controllers.MyPages.stylist_guanzhu
+
+
+
+#add Comment
+GET     /addComment/:id                  controllers.Comments.addComment(id : ObjectId)
+GET     /comment/:commentedId            controllers.Comments.find(commentedId : ObjectId)
+GET     /answer/:id/:commentedId         controllers.Comments.answer(id : ObjectId, commentedId : ObjectId)
+GET     /huifu/:id/:commentedId          controllers.Comments.huifu(id : ObjectId, commentedId : ObjectId)
+GET     /delete/:id/:commentedId         controllers.Comments.delete(id : ObjectId, commentedId : ObjectId)
+GET     /complaint/:cmId                 controllers.Comments.complaint(cmId : ObjectId)
+GET     /testComment                     controllers.Comments.test
+POST     /addC/:commentedId              controllers.Comments.addC(commentedId : ObjectId)
+
+
+# add Blog
+GET     /newBlog/:id                     controllers.Blogs.newBlog(id : ObjectId)
+GET     /testBlog                        controllers.Blogs.test
+GET     /deleteBlog/:id                  controllers.Blogs.deleteBlog(id : ObjectId)
+GET     /showBlog/:id                    controllers.Blogs.showBlog(id : ObjectId)
+GET     /showBlogById/:id                controllers.Blogs.showBlogById(id : ObjectId)
+POST    /writeBlog/:id/                  controllers.Blogs.writeBlog(id : ObjectId)
+GET     /newBlogCatagory/:userId         controllers.BlogCatagories.newBlogCatagory(userId : ObjectId)
+GET     /editBlogCatagory/:userId        controllers.BlogCatagories.editBlogCatagory(userId : ObjectId)
+GET     /writeBlogCatagory/:userId       controllers.BlogCatagories.writeBlogCatagory(userId : ObjectId)
+GET     /delBlogCatarory/:userId/:blogCatagory    controllers.BlogCatagories.delBlogCatarory(userId : ObjectId, blogCatagory : String)
+GET     /modBlogCatarory/:userId/:blogCatagory    controllers.BlogCatagories.modBlogCatarory(userId : ObjectId, blogCatagory : String)
+GET     /modCatagory/:userId/:blogCatagory        controllers.BlogCatagories.modCatagory(userId : ObjectId, blogCatagory : String)
+
+
+#add by wu end 
+#-------------------------------------------------------------------------------------------
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                    controllers.Assets.at(path="/public", file)
-
-
-
-

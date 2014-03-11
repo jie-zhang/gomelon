@@ -1,5 +1,9 @@
+<<<<<<< HEAD:app/views/salon/store/homepage.scala.html
 @(navInSalon: String = "salon-basic", salon: Salon, style: Seq[Style], stylist: Seq[Stylist], blog: Option[String] = None, comment: Option[String] = None)
 
+=======
+@(navInSalon: String = "salon-basic", salon: Salon)(content: Html)
+>>>>>>> 2f0a55ed316c166a8933b0a2bdc30bf8afccbb55:app/views/salon/store/salonInfoMain.scala.html
 
 <!-- the main page of salon.
      plan to use this as the main frame of the pages as below:
@@ -18,12 +22,7 @@ TODO
 
 @main("todo", "hair-salon") {
 
-    <!-- ↓navigation bar -->
-    @views.html.common.navigationBar()
-    <!-- ↑navigation bar -->
-
-    <!-- ↓contents-->
-    <div id="contents" class="cFix">
+<!-- ↓contents -->
 
         <!-- ↓mainContents -->
         <div id="salonMainContents">
@@ -33,8 +32,8 @@ TODO
 	    <!-- ↓salonInfoHeader -->
 
             <!-- ↓salonInfoBody -->
-            <!--TODO  define a type, an Enum type to express the parameters... -->  
-            @views.html.salon.store.salonInfoBody(navInSalon, salon, style, stylist, blog, comment)
+            <!-- show different body contents according to the NAV tab. -->
+            @content
             <!-- ↑salonInfoBody -->  
 
             <!-- ↓salonInfoFooter  -->
@@ -48,10 +47,6 @@ TODO
         @views.html.salon.store.rightColumn(None)
         <!-- ↑sideContents -->
 
-    </div> 
-    <!-- ↑contents-->
-    
-    <!-- ↓footer -->
-    <!-- TODO -->
-    <!-- ↑footer -->
+<!-- ↑contents -->
+
 }
