@@ -16,11 +16,17 @@ object BlogCatagories extends Controller {
     val formBlogCatagory = Form((
     "catagory" -> nonEmptyText
     ))
-
+    
+    /**
+     * 创建一个新的分类，跳转
+     */
     def newBlogCatagory(userId : ObjectId) = Action {
       Ok(views.html.blog.newBlogCatagory(userId, formBlogCatagory))
     }
     
+    /**
+     * 创建一个新的分类，后台逻辑
+     */
     def writeBlogCatagory(userId : ObjectId) = Action {
       implicit request =>
       formBlogCatagory.bindFromRequest.fold(
@@ -32,29 +38,51 @@ object BlogCatagories extends Controller {
 	        BlogCatagory.newBlogCatagory(userId, catagory)
 	        Ok("创建成功！")
         }
-                
-          
-            
         )
     }
     
+    /**
+     * 编辑分类
+     */
     def editBlogCatagory(userId : ObjectId) = Action {
       val listBlogCatagory = BlogCatagory.findBlogCatagory(userId)
-      val catarory = listBlogCatagory(0).catagory
+//      val catarory = listBlogCatagory(0).catagory
+      var catarory : List[String] = Nil
+      if(listBlogCatagory.isEmpty){
+        catarory = Nil
+      }else 
+        catarory = listBlogCatagory(0).catagory
       Ok(views.html.blog.editBlogCatagory(userId, catarory))
     }
     
+    /**
+     * 删除分类
+     */
+    // TODO 这边的代码有点问题，要把该分类下的blog的类型转换成默认的一种，类似没有分类后blog自动划归到全部的tab下
     def delBlogCatarory(userId : ObjectId, blogCatagory : String) = Action {
       BlogCatagory.delBlogCatagory(userId, blogCatagory)
-      val listBlogCatagory = BlogCatagory.findBlogCatagory(userId)
-      val catarory = listBlogCatagory(0).catagory
+      // 把该分类下的blog的类型转换成“选择分类”
+      Blog.delBlogCatarory(userId, blogCatagory)
+      var listBlogCatagory = BlogCatagory.findBlogCatagory(userId)
+      var catarory : List[String] = Nil
+      if(listBlogCatagory.isEmpty){
+        catarory = Nil
+      }else 
+        catarory = listBlogCatagory(0).catagory
       Ok(views.html.blog.editBlogCatagory(userId, catarory))
     }
     
+    /**
+     * 修改分类，跳转
+     */
     def modBlogCatarory(userId : ObjectId, blogCatagory : String) = Action {
       Ok(views.html.blog.modBlogCatagory(formBlogCatagory, blogCatagory, userId))
     }
     
+    /**
+     * 修改分类，后台逻辑
+     */
+    // TODO 这边的代码有点问题，要把该分类下的blog的类型转换成新的分类,OK
     def modCatagory(userId : ObjectId, blogCatagory : String) = Action {
             implicit request =>
       formBlogCatagory.bindFromRequest.fold(
@@ -63,136 +91,11 @@ object BlogCatagories extends Controller {
         {
           case (catagory) =>        
 	        BlogCatagory.modCatagory(userId, blogCatagory, catagory)
+	        //修改blog的分类
+	        Blog.modCatagory(userId, blogCatagory, catagory)
 	        Redirect(routes.BlogCatagories.editBlogCatagory(userId))
-        }
-                
-          
-            
+
+        } 
         )
     }
-
-
-  
-//  def newBlog(id : ObjectId) = Action {
-//    Ok(views.html.blog.blog(id, formBlog))
-//  }
-//  
-//  def deleteBlog(id : ObjectId) = Action {
-//     implicit request =>
-//      val user_id = request.session.get("user_id").get
-//      val userId = new ObjectId(user_id)
-//    Blog.delete(id)
-//    Redirect(routes.Blogs.showBlog(userId))
-//  }
-  
-//  def test = Action  {
-//    
-//    implicit request =>      
-//      val user_id = request.session.get("user_id").get
-//      val userId = new ObjectId(user_id)
-//      val username = User.getUsername(userId)
-//   Redirect(routes.Blog.showBlog(userId))
-//
-//
-//  }
-  
-//  def showBlog(id : ObjectId) = Action {
-//    val list = Blog.showBlog(id)
-//    Ok(views.html.blog.findBlogs(id, list))
-//  }
-//  
-//  def writeBlog(id : ObjectId) = Action {
-//      implicit request =>
-//      formBlog.bindFromRequest.fold(
-//        //处理错误
-//        errors => BadRequest(views.html.blog.blog(id, errors)),
-//        {
-//          case (title,content,blogTyp,tags) =>
-////            val userId = new ObjectId(user_id) // 这边需要用session取得用户名之类的东西
-////            val commentedId = new ObjectId(user_id)
-////            val relevantUser = new ObjectId(user_id)            
-//	        Blog.newBlog(id, title,content,blogTyp,tags)
-//	        Ok(views.html.blog.showBlog(id))
-//        }
-//                
-//          
-//            
-//        )
-//  }
-  
-//  implicit def clean() = {
-//    Comments.list = Nil
-//  }
-  
-//  def addComment = Action {
-//    Ok(views.html.addComment(formAddComment))
-//  }
-  
-//  def addC = Action {
-//    implicit request =>
-//      val user_id = request.session.get("user_id").get
-//      formAddComment.bindFromRequest.fold(
-//        //处理错误
-//        errors => BadRequest(views.html.addComment(errors)),
-//        {
-////          case (cmUsername, cmTime, cmContent, cmService, cmAddContent) =>
-//          case (content) =>
-//            val userId = new ObjectId(user_id) // 这边需要用session取得用户名之类的东西
-////            val time = nowTime
-////            val status = 0
-//            val commentedId = new ObjectId(user_id)
-//            val relevantUser = new ObjectId(user_id)
-//            
-//	        Comments.addComment(userId, content, commentedId, relevantUser)
-//	        
-////            Ok(Html("评论成功"))
-////	        Redirect(routes.Comment.find).withSession(request.session+("_id" -> _id))
-//	        Redirect(routes.Comment.find)
-//        }
-//                
-//          
-//            
-//        )
-//  }
-  
-//  def complaint = Action {
-//    Ok(views.html.complaint(request.session.get("_id").get))
-//  }
-  
-//  def complaint(id : ObjectId) = Action {
-//    Ok(Html("我要申诉的评论Id是" + id))
-//  }
-  
-//  def answer(id : ObjectId) = Action {
-//    Ok(views.html.answer(id, formHuifuComment))
-//  }
-  
-//  def delete(id : ObjectId) = Action {
-//    Comments.delete(id)
-//    Redirect(routes.Comment.find)
-//  }
-  
-//  def huifu(id : ObjectId) = Action {
-//    implicit request =>
-//      val user_id = request.session.get("user_id").get
-//      formHuifuComment.bindFromRequest.fold(
-//        //处理错误
-//        errors => BadRequest(views.html.answer(id, errors)),
-//        {
-////          case (cmUsername, cmTime, cmContent, cmService, cmAddContent) =>
-//          case (content) =>
-//            val username = new ObjectId(user_id)
-//            println("content" + content, "username" + username)
-//	        Comments.huifu(id, content, username)
-//
-////            Ok(Html("评论成功"))
-////	        Redirect(routes.Comment.find).withSession(request.session+("_id" -> _id))
-//	        Redirect(routes.Comment.find)
-////	        Ok(Html("test"))
-//        } 
-//        )
-//  }
-
-
-
 }

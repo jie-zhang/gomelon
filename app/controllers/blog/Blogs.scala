@@ -10,6 +10,7 @@ import models._
 import com.mongodb.casbah.Imports.ObjectId
 
 
+
 object Blogs extends Controller {
   
   val formBlog = Form(tuple(
@@ -24,7 +25,11 @@ object Blogs extends Controller {
    */
   def newBlog(userId : ObjectId) = Action {
     // list是一个blog分类的list
-    val list = BlogCatagory.getCatagory(userId)
+    var list = BlogCatagory.getCatagory(userId)
+//    if(list.isEmpty){
+    // 创建两个不变的分类，这两个是默认的，不可编辑，不可删除
+      list :::= List("选择分类","私密博文")
+//    }
     Ok(views.html.blog.blog(userId, formBlog, list))
   }
   
@@ -44,12 +49,48 @@ object Blogs extends Controller {
    */
   // 这是数据库中用户的ObjectId
   def test = Action {
-    val userId = new ObjectId("53195c87a89e175858abce80")
+    val userId = new ObjectId("530d8010d7f2861457771bf8")
     val list = Blog.findByUserId(userId)
     // 目前传递的是username，可能需要传真实姓名或者是昵称，待完善
     val name = User.getUserName(userId)
+    println("name" + name)
     // 这边时间的format需要调整，目前的格式是2014/03/05 9:04:08，，，，可能需要调整
     Ok(views.html.blog.blogTest(name, list))
+  }
+  
+  /**
+   * 取得指定店铺的指定blog
+   */
+  def getBlogInfoOfSalon(slnId: ObjectId, blogId: ObjectId) = Action {
+    //目前是为了造数据使用的 ，下面两句
+    val userId = new ObjectId("530d8010d7f2861457771bf8")
+    val list = Blog.findByUserId(userId)
+    
+    val salon: Option[Salon] = Salon.findById(slnId)    
+    val blog: Option[Blog] = Blog.findBySalon(slnId, blogId) 
+//    println("salon" + salon)
+//    println("blog" + blog)
+
+    // TODO: process the salon not exist pattern.
+    Ok(views.html.salon.store.salonInfoBlog(salon = salon.get, blog = blog.get))
+ }
+  /**
+   * 取得店铺所有的blog
+   */
+  def findBySalon(salonId: ObjectId) = Action {
+    //目前是为了造数据使用的，下面两句
+    val userId = new ObjectId("530d8010d7f2861457771bf8")
+    val list = Blog.findByUserId(userId)
+    
+    Blog.bloglist = Nil
+    val salon: Option[Salon] = Salon.findById(salonId)    
+    val blogs: Seq[Blog] = Blog.findBySalon(salonId)    
+    
+//    println("blogs" + blogs)
+    
+
+    // TODO: process the salon not exist pattern.
+    Ok(views.html.salon.store.salonInfoBlogAll(salon = salon.get, blogs = blogs))
   }
   
 
