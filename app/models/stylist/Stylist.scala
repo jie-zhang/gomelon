@@ -36,8 +36,8 @@ object Stylist {
         StylistDAO.find(MongoDBObject.empty).toList
     }
 
-    def findById(id: ObjectId): List[Stylist] = {
-        StylistDAO.findOne(MongoDBObject("_id" -> id)).toList
+    def findById(id: ObjectId): Option[Stylist] = {
+        StylistDAO.findOne(MongoDBObject("_id" -> id))
     }
 
     def findBySalon(salonId: ObjectId): List[Stylist] = {

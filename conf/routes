@@ -54,7 +54,7 @@ GET     /finishRecord/:id               controllers.Records.finishRecord(id: Obj
 GET     /findRecordByCondition          controllers.Records.findRecordByCondition
 
 #add reservation
-GET     /reservHairView                 controllers.Reservations.reservHairView
+GET     /reservHairView/:id             controllers.Reservations.reservHairView(id: ObjectId)
 GET     /reservSelectDate               controllers.Reservations.reservSelectDate
 GET     /reservSelectStylist            controllers.Reservations.reservSelectStylist
 POST    /reservConfirmPwd               controllers.Reservations.reservConfirmPwd
