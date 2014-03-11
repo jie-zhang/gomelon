@@ -24,5 +24,8 @@ tmp
 dist
 *.iml
 
+# ignore auto backuped html files.
+*.bak
+
 # individual work plan not to commit.
 doc/plan
